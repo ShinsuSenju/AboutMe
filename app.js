@@ -161,6 +161,7 @@ function openWindow(windowId) {
   const win = document.getElementById(windowId);
   if (win) {
     win.classList.remove("window-closed", "minimized");
+    win.style.display = "block";
     focusWindow(win);
   }
   const baseName = windowId.replace("-window", "");
@@ -231,6 +232,48 @@ document.addEventListener("click", (e) => {
     }
   }
 });
+
+const menuOpen = document.getElementById("menu-open");
+const menuOpenWith = document.getElementById("menu-open-with");
+
+if (menuOpen) {
+  menuOpen.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (activeIcon) {
+      const appId = activeIcon.id.replace("icon-", "");
+      openApp(appId);
+    }
+    closeAllMenus();
+  });
+}
+
+if (menuOpenWith) {
+  menuOpenWith.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (activeIcon) {
+      const fileName = activeIcon.querySelector("span").innerText;
+      alert(`Hey! I guess i forgot to build this :p`);
+    }
+    closeAllMenus();
+  });
+}
+
+const menuDelete = document.getElementById("menu-delete");
+if (menuDelete) {
+  menuDelete.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (activeIcon) {
+      if (activeIcon.id === "icon-recycle") {
+        alert(
+          "You cannot delete the Recycle Bin. That would break the universe.",
+        );
+      } else {
+        activeIcon.style.display = "none";
+      }
+    }
+    closeAllMenus();
+  });
+}
 
 document.getElementById("example15").addEventListener("change", () => {
   desktopIconsContainer.className = "desktop-icons large";
@@ -623,7 +666,80 @@ desktopIconsList.forEach((icon) => {
   });
 });
 
-const myComputer = document.getElementById("icon-computer");
-myComputer.addEventListener("dblclick", () => {
-  myComputer.classList.remove("window-closed");
+//recyle bin
+
+function emptyRecycleBin() {
+  const contents = document.getElementById("recycle-contents");
+  const emptyMsg = document.getElementById("recycle-empty-msg");
+  const footerText = document.getElementById("recycle-footer-text");
+
+  if (contents.style.display !== "none") {
+    const audio = new Audio("./audio/ding.mp3");
+    audio
+      .play()
+      .catch((e) => console.log("Audio blocked by browser, skipping."));
+    contents.style.display = "none";
+    emptyMsg.style.display = "block";
+    footerText.innerHTML = "0 items";
+
+    const desktopRecycleIcon = document.querySelector("#icon-recycle img");
+    if (desktopRecycleIcon)
+      desktopRecycleIcon.src = "./images/recycle-icon-empty.ico";
+  } else {
+    alert(
+      "Hey what are you even deleting? can\'t you see it\'s already empty?",
+    );
+  }
+}
+
+// open any app
+
+function openApp(appId) {
+  openWindow(`${appId}-window`);
+}
+
+const selectableItems = document.querySelectorAll(".win7-device, .win7-file");
+const containers = document.querySelectorAll(".win7-container");
+
+selectableItems.forEach((item) => {
+  item.addEventListener("click", (e) => {
+    selectableItems.forEach((i) => i.classList.remove("selected"));
+
+    item.classList.add("selected");
+
+    e.stopPropagation();
+  });
 });
+
+containers.forEach((container) => {
+  container.addEventListener("click", () => {
+    selectableItems.forEach((i) => i.classList.remove("selected"));
+  });
+});
+
+// recycle bin to my computer
+function navigateExplorer(e, targetAppId) {
+  const currentWindow = e.target.closest(".window");
+  const targetWindow = document.getElementById(`${targetAppId}-window`);
+
+  if (currentWindow && targetWindow && currentWindow !== targetWindow) {
+    targetWindow.style.top = currentWindow.style.top;
+    targetWindow.style.left = currentWindow.style.left;
+    targetWindow.style.width = currentWindow.style.width;
+    targetWindow.style.height = currentWindow.style.height;
+
+    if (currentWindow.classList.contains("maximized")) {
+      targetWindow.classList.add("maximized");
+    } else {
+      targetWindow.classList.remove("maximized");
+    }
+
+    currentWindow.style.display = "none";
+    currentWindow.classList.add("window-closed");
+    const currentAppId = currentWindow.id.replace("-window", "");
+    const currentTaskbar = document.getElementById(`taskbar-${currentAppId}`);
+    if (currentTaskbar) currentTaskbar.style.display = "none";
+
+    openApp(targetAppId);
+  }
+}
