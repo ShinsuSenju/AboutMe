@@ -1085,13 +1085,13 @@ button:focus {
   filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
 }
 #tray-volume._3 {
-  background-image: url("./images/volume/3.ico");
+  background-image: url("./images/3.ico");
 }
 #tray-network.wlan1 {
-  background-image: url("./images/network/wifi-1.ico");
+  background-image: url("./images/wifi-1.ico");
 }
 #tray-battery {
-  background-image: url("./images/battery/charging_.png");
+  background-image: url("./images/charging_.png");
   background-position-x: 5px;
 }
 #battery-bar {
