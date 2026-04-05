@@ -1,16 +1,21 @@
-# Windows OS Portfolio
+# Windows 7 Portfolio
 
-Live Demo: https://shinsusenju.github.io/PersonalPortfolio/
+Live:
+https://shinsusenju.github.io/PersonalPortfolio/
 
-## Tech Stack
+## About
 
-* HTML
-* CSS
-* JavaScript
+A Windows 7–style portfolio.
 
-## Description
+Built to experiment with DOM and state-driven behavior in plain JavaScript.
 
-A Windows 7–style interactive portfolio simulating a desktop environment with boot screen, windows, and basic OS-like interactions.
+## Tech
+
+HTML · CSS · JavaScript
+
+## Note
+
+Best experienced on desktop.
 
 ## License
 
