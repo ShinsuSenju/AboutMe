@@ -136,6 +136,27 @@ startMenu.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
+// system tray
+// const trayBattery = document.getElementById("tray-battery");
+
+// function updateBattery(battery) {
+//   trayBattery.style.setProperty("--percent", battery.level * 100 + "%");
+//   if (battery.charging === true) {
+//     trayBattery.classList.add("charging");
+//   } else {
+//     trayBattery.classList.remove("charging");
+//   }
+//   trayBattery.title = `Battery: ${Math.round(battery.level * 100)}% ${battery.charging ? "(Plugged in)" : "(Remaining)"}`;
+// }
+
+// if ("getBattery" in navigator) {
+//   navigator.getBattery().then((battery) => {
+//     updateBattery(battery);
+//     battery.addEventListener("levelchange", () => updateBattery(battery));
+//     battery.addEventListener("chargingchange", () => updateBattery(battery));
+//   });
+// }
+
 //windows
 let highestZIndex = 100;
 
@@ -375,7 +396,7 @@ hackBtn.addEventListener("click", (e) => {
     hackStep = 1;
   } else {
     alert(
-      "BREACH DETECTED. GOOGLE CYBERSECURITY INBOUND... just kidding. Nice click!",
+      "BREACH DETECTED. GOOGLE CYBERSECURITY INBOUND... just kidding. Learn Hacking First!",
     );
     hackText.innerText = "Hack Google";
     hackText.style.color = "";
@@ -433,16 +454,26 @@ if (projectsBtn) {
 }
 
 //close btn title bar
+window.closeWindow = function (windowId) {
+  const win = document.getElementById(windowId);
+  if (win) {
+    win.classList.add("window-closed");
+    win.style.display = "none";
+
+    const baseName = windowId.replace("-window", "");
+    const taskbarIcon = document.getElementById(`taskbar-${baseName}`);
+    if (taskbarIcon) {
+      taskbarIcon.style.display = "none";
+      taskbarIcon.classList.remove("app-active");
+    }
+  }
+};
+
 document.querySelectorAll(".titlebar-close").forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const parentWindow = e.target.closest(".window");
     if (parentWindow) {
-      parentWindow.classList.add("window-closed");
-      const baseName = parentWindow.id.replace("-window", "");
-      const taskbarBtn = document.getElementById(`taskbar-${baseName}`);
-      if (taskbarBtn) {
-        taskbarBtn.style.display = "none";
-      }
+      closeWindow(parentWindow.id);
     }
   });
 });
@@ -743,3 +774,84 @@ function navigateExplorer(e, targetAppId) {
     openApp(targetAppId);
   }
 }
+
+//  welcome window
+let currentWizPage = 1;
+const totalWizPages = 6;
+
+const btnBack = document.getElementById("wiz-back");
+const btnNext = document.getElementById("wiz-next");
+const btnFinish = document.getElementById("wiz-finish");
+
+function updateWizard() {
+  for (let i = 1; i <= totalWizPages; i++) {
+    const page = document.getElementById(`welcome-page-${i}`);
+    if (page) {
+      page.hidden = true;
+      page.classList.remove("active-page");
+    }
+  }
+
+  const activePage = document.getElementById(`welcome-page-${currentWizPage}`);
+  if (activePage) {
+    activePage.hidden = false;
+    activePage.classList.add("active-page");
+  }
+
+  if (btnBack) btnBack.disabled = currentWizPage === 1;
+
+  if (currentWizPage === totalWizPages) {
+    if (btnNext) btnNext.style.display = "none";
+    if (btnFinish) btnFinish.style.display = "inline-block";
+  } else {
+    if (btnNext) btnNext.style.display = "inline-block";
+    if (btnFinish) btnFinish.style.display = "none";
+  }
+}
+updateWizard();
+
+if (btnNext) {
+  btnNext.addEventListener("click", () => {
+    if (currentWizPage < totalWizPages) {
+      currentWizPage++;
+      updateWizard();
+    }
+  });
+}
+
+if (btnBack) {
+  btnBack.addEventListener("click", () => {
+    if (currentWizPage > 1) {
+      currentWizPage--;
+      updateWizard();
+    }
+  });
+}
+
+if (btnFinish) {
+  btnFinish.addEventListener("click", () => {
+    closeWindow("welcome-window");
+  });
+}
+
+const tabButtons = document.querySelectorAll('.wizard-tabs button[role="tab"]');
+
+tabButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const container = button.closest(".window-body, .wizard-page");
+
+    container.querySelectorAll('button[role="tab"]').forEach((btn) => {
+      btn.setAttribute("aria-selected", "false");
+    });
+
+    container.querySelectorAll('article[role="tabpanel"]').forEach((panel) => {
+      panel.hidden = true;
+    });
+    button.setAttribute("aria-selected", "true");
+    const targetPanelId = button.getAttribute("aria-controls");
+    const targetPanel = document.getElementById(targetPanelId);
+    if (targetPanel) {
+      targetPanel.hidden = false;
+    }
+  });
+});

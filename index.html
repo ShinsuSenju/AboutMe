@@ -53,6 +53,7 @@
         </div>
       </div>
     </div>
+
     <div id="welcome-screen" class="screen hidden">
       <div class="welcome-content">
         <div class="welcome-row">
@@ -61,13 +62,10 @@
         </div>
       </div>
     </div>
+
     <div id="desktop" class="screen hidden">
       <div class="background">
-        <div
-          class="window glass active window-closed"
-          id="projects-window"
-          style="width: 450px; position: absolute; top: 20%; left: 20%"
-        >
+        <div class="window glass active window-closed" id="projects-window">
           <div class="title-bar">
             <div class="title-bar-text">My Projects</div>
             <div class="title-bar-controls">
@@ -76,25 +74,278 @@
               <button aria-label="Close" class="titlebar-close"></button>
             </div>
           </div>
-          <div class="window-body has-space">
-            <p>Here are some things I built scratching my brain:</p>
-            <ul>
-              <li>My Portfolio Website</li>
-              <li></li>
-            </ul>
+
+          <div class="window-body has-space standalone-body">
+            <menu role="tablist" class="wizard-tabs">
+              <button
+                role="tab"
+                aria-selected="true"
+                aria-controls="proj2-port"
+              >
+                Windows 7 Portfolio
+              </button>
+              <button role="tab" aria-controls="proj2-yelp">
+                Yelp Campgrounds
+              </button>
+              <button role="tab" aria-controls="proj2-wip">W.I.P</button>
+            </menu>
+
+            <div class="has-scrollbar wizard-tab-content">
+              <article role="tabpanel" id="proj2-port">
+                <strong>Windows 7 Portfolio</strong><br />
+                <ul>
+                  <li>Built a Windows 7 Style Portfolio</li>
+                  <li>
+                    Used advanced DOM manipulation method to implement features
+                    like dragging windows and icons
+                  </li>
+                  <li>Used only HTML, CSS and Vanilla JavaScript</li>
+                </ul>
+              </article>
+
+              <article role="tabpanel" id="proj2-yelp" hidden>
+                <strong>Full Stack & Testing</strong><br />
+                <ul>
+                  <li>
+                    Developed a full-stack web app using Node.js, Express.js,
+                    and MongoDB.
+                  </li>
+                  <li>
+                    Used Mapbox api to for live maps & location. Utilized
+                    passportJs for authentication and cloudinary for storage.
+                  </li>
+                  <li>
+                    Designed and executed functional/API test cases using
+                    Postman to validate CRUD workflows and secure
+                    authentication.
+                  </li>
+                  <li>
+                    Built a responsive UI using HTML, CSS, JavaScript, and
+                    Bootstrap.
+                  </li>
+                </ul>
+              </article>
+
+              <article role="tabpanel" id="proj2-wip" hidden>
+                <strong>Work In Progress</strong><br />
+                <ul>
+                  <li>I'm working on more interesting projects.</li>
+                  <li>
+                    You might want to bookmark this website or revisit again to
+                    check on them.
+                  </li>
+                </ul>
+              </article>
+            </div>
           </div>
         </div>
-        <div
-          class="window glass active window-closed"
-          id="computer-window"
-          style="
-            width: 850px;
-            height: 550px;
-            position: absolute;
-            top: 10%;
-            left: 10%;
-          "
-        >
+
+        <div class="window glass active" id="welcome-window">
+          <div class="title-bar">
+            <div class="title-bar-text" style="margin-bottom: 3px">
+              Windows 7 Setup
+            </div>
+            <div class="title-bar-controls">
+              <button aria-label="Minimize" class="titlebar-min"></button>
+              <button aria-label="Maximize" class="titlebar-max"></button>
+              <button
+                aria-label="Close"
+                class="titlebar-close"
+                onclick="closeWindow('welcome-window')"
+              ></button>
+            </div>
+          </div>
+
+          <div class="window-body wizard-body">
+            <div class="wizard-sidebar">
+              <h2>Welcome Wizard</h2>
+              <p>Follow the steps to complete the setup wizard.</p>
+            </div>
+
+            <div class="wizard-content-area">
+              <div id="welcome-page-1" class="wizard-page active-page">
+                <h3>Welcome to my Windows 7</h3>
+                <p>Hey There! I'm <strong>Anurag</strong>.</p>
+                <p>
+                  I built this cool portfolio inspired from Windows 7 using just
+                  HTML, CSS and JS.
+                </p>
+                <p>
+                  Click <strong>Next</strong> to Know more. or just close this
+                  window and explore
+                </p>
+              </div>
+
+              <div id="welcome-page-2" class="wizard-page" hidden>
+                <h3>Experience</h3>
+                <div class="has-scrollbar wizard-scroll-box">
+                  <fieldset>
+                    <legend>Experience</legend>
+                    <strong>Capgemini <em>(July 2025 - Present)</em></strong>
+                    — Automation Test Engineer<br />
+                    <span class="text-muted"
+                      >Developed Java-based automated test cases (Selenium,
+                      TestNG, Cucumber) for web and POS systems of a leading
+                      global QSR, improved regression coverage, reduced
+                      maintenance effort by ~30%, validated APIs, and supported
+                      CI pipelines in an Agile environment.</span
+                    >
+                  </fieldset>
+                </div>
+              </div>
+
+              <div id="welcome-page-3" class="wizard-page" hidden>
+                <h3>Certifications</h3>
+                <div class="has-scrollbar wizard-scroll-box cert-scroll">
+                  <fieldset>
+                    <legend>Certifications</legend>
+                    <strong>Google Associate Data Practitioner</strong><br />
+                    <span class="text-muted"
+                      >Certified in SQL, BigQuery, and Looker. Experienced in
+                      data preparation, pipelines, and analytical best
+                      practices.</span
+                    ><br /><br />
+                    <strong>Java Programming (Learn Quest)</strong><br />
+                    <span class="text-muted"
+                      >Focused on core and advanced Java features.</span
+                    ><br /><br />
+                    <strong>Cloud Computing (NPTEL)</strong><br />
+                    <span class="text-muted"
+                      >Core cloud architecture, virtualization, and deployment
+                      models (IaaS, PaaS, SaaS).</span
+                    >
+                  </fieldset>
+                </div>
+              </div>
+
+              <div id="welcome-page-4" class="wizard-page" hidden>
+                <h3>Technical Skills</h3>
+                <div class="has-scrollbar wizard-scroll-box">
+                  <fieldset>
+                    <legend>Languages & Web</legend>
+                    Java, JavaScript, Node.js, HTML, CSS
+                  </fieldset>
+                  <fieldset>
+                    <legend>Testing & QA</legend>
+                    Selenium WebDriver, TestNG, Cucumber, Postman, JMeter
+                  </fieldset>
+                  <fieldset>
+                    <legend>DevOps & Databases</legend>
+                    Git, Maven, Jenkins, MongoDB
+                  </fieldset>
+                </div>
+              </div>
+
+              <div id="welcome-page-5" class="wizard-page projects-page" hidden>
+                <h3>Featured Projects</h3>
+
+                <menu role="tablist" class="wizard-tabs">
+                  <button
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="proj-port"
+                  >
+                    Windows 7 Portfolio
+                  </button>
+                  <button role="tab" aria-controls="proj-yelp">
+                    Yelp Campgrounds
+                  </button>
+                  <button role="tab" aria-controls="proj-wip">W.I.P</button>
+                </menu>
+
+                <div class="has-scrollbar wizard-tab-content">
+                  <article role="tabpanel" id="proj-port">
+                    <strong>Windows 7 Portfolio</strong><br />
+                    <ul>
+                      <li>Built a Windows 7 Style Portfolio</li>
+                      <li>
+                        Used advanced DOM manipulation method to implement
+                        features like dragging windows and icons
+                      </li>
+                      <li>Used only HTML, CSS and Vanilla JavaScript</li>
+                    </ul>
+                  </article>
+
+                  <article role="tabpanel" id="proj-yelp" hidden>
+                    <strong>Full Stack & Testing</strong><br />
+                    <ul>
+                      <li>
+                        Developed a full-stack web app using Node.js,
+                        Express.js, and MongoDB.
+                      </li>
+                      <li>
+                        Used Mapbox API for live maps & location. Utilized
+                        passportJs for authentication and cloudinary for
+                        storage.
+                      </li>
+                      <li>
+                        Designed and executed functional/API test cases using
+                        Postman to validate CRUD workflows and secure
+                        authentication.
+                      </li>
+                      <li>
+                        Built a responsive UI using HTML, CSS, JavaScript, and
+                        Bootstrap.
+                      </li>
+                    </ul>
+                  </article>
+
+                  <article role="tabpanel" id="proj-wip" hidden>
+                    <strong>Work In Progress</strong><br />
+                    <ul>
+                      <li>I'm working on more interesting projects.</li>
+                      <li>
+                        You might want to bookmark this website or revisit again
+                        to check on them.
+                      </li>
+                    </ul>
+                  </article>
+                </div>
+              </div>
+
+              <div id="welcome-page-6" class="wizard-page" hidden>
+                <h3>Setup Complete</h3>
+                <div class="hook-content">
+                  <p>You are now ready to explore the system.</p>
+                  <p><strong>Quick Tips:</strong></p>
+                  <ul>
+                    <li>
+                      Open <em>My Computer</em> to view my project repositories
+                      (W.I.P).
+                    </li>
+                    <li>
+                      Click the Start Button to meet <strong>Rover</strong>. He
+                      can help you with searching about me in depth (W.I.P).
+                    </li>
+                    <li>
+                      Don't try something like deleting recycle bin or stopping
+                      system32 using task manager or update windows using
+                      desktop icon (W.I.P).
+                    </li>
+                  </ul>
+                  <p class="finish-prompt">
+                    Click <em>Finish</em> to close this wizard and explore the
+                    desktop.
+                  </p>
+                </div>
+              </div>
+
+              <div class="wizard-footer">
+                <button id="wiz-back" disabled>&lt; Back</button>
+                <button id="wiz-next">Next &gt;</button>
+                <button
+                  id="wiz-finish"
+                  style="display: none"
+                  onclick="closeWindow('welcome-window')"
+                >
+                  Finish
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="window glass active window-closed" id="computer-window">
           <div class="title-bar" style="margin-bottom: 0; padding-bottom: 5px">
             <div class="title-bar-text">Computer</div>
             <div class="title-bar-controls">
@@ -132,16 +383,7 @@
             </div>
           </div>
 
-          <div
-            class="window-body"
-            style="
-              margin: 0;
-              padding: 0;
-              display: flex;
-              flex-direction: column;
-              height: calc(100% - 65px);
-            "
-          >
+          <div class="window-body explorer-body">
             <div class="win7-toolbar">
               <div
                 class="toolbar-item"
@@ -195,20 +437,17 @@
                   <div class="sidebar-header">★ Favorites</div>
                   <ul>
                     <li>
-                      <img src="./images/computer-icon.ico" />
-                      My Computer
+                      <img src="./images/computer-icon.ico" /> My Computer
                     </li>
                     <li onclick="alert('Go Download Something first -_- .')">
-                      <img src="./images/downloads.ico" />
-                      Downloads
+                      <img src="./images/downloads.ico" /> Downloads
                     </li>
                     <li
                       onclick="
                         alert('i have not been to a lot of places lately :( ')
                       "
                     >
-                      <img src="./images/recent.ico" />
-                      Recent Places
+                      <img src="./images/recent.ico" /> Recent Places
                     </li>
                   </ul>
                 </div>
@@ -216,17 +455,12 @@
                 <div class="sidebar-section">
                   <div class="sidebar-header">📚 Libraries</div>
                   <ul>
-                    <li>
-                      <img src="./images/documents.ico" />
-                      Documents
-                    </li>
+                    <li><img src="./images/documents.ico" /> Documents</li>
                     <li onclick="alert('Playing Music')">
-                      <img src="./images/music.ico" />
-                      Music
+                      <img src="./images/music.ico" /> Music
                     </li>
                     <li onclick="alert('rickroll')">
-                      <img src="./images/video.ico" />
-                      Videos
+                      <img src="./images/video.ico" /> Videos
                     </li>
                   </ul>
                 </div>
@@ -254,9 +488,7 @@
                     <div class="storage-txt">1.2 GB free of 100 GB</div>
                   </div>
                   <div class="win7-device disk-data">
-                    <div class="name">
-                      <label>Projects (D:)</label>
-                    </div>
+                    <div class="name"><label>Projects (D:)</label></div>
                     <div class="storage-bar">
                       <div style="width: 55%"></div>
                     </div>
@@ -273,9 +505,7 @@
                   </div>
                   <div class="win7-device disk-usb">
                     <div class="name"><label>Wallet (G:)</label></div>
-                    <div class="storage-bar">
-                      <div style="width: 5%"></div>
-                    </div>
+                    <div class="storage-bar"><div style="width: 5%"></div></div>
                     <div class="storage-txt">24.0 GB free of 25.0 GB</div>
                   </div>
                 </div>
@@ -296,17 +526,8 @@
             </div>
           </div>
         </div>
-        <div
-          class="window glass active window-closed"
-          id="recycle-window"
-          style="
-            width: 800px;
-            height: 500px;
-            position: absolute;
-            top: 15%;
-            left: 20%;
-          "
-        >
+
+        <div class="window glass active window-closed" id="recycle-window">
           <div class="title-bar" style="margin-bottom: 0; padding-bottom: 5px">
             <div class="title-bar-text">Recycle Bin</div>
             <div class="title-bar-controls">
@@ -334,16 +555,7 @@
             </div>
           </div>
 
-          <div
-            class="window-body"
-            style="
-              margin: 0;
-              padding: 0;
-              display: flex;
-              flex-direction: column;
-              height: calc(100% - 65px);
-            "
-          >
+          <div class="window-body explorer-body">
             <div class="win7-toolbar">
               <div
                 class="toolbar-item"
@@ -442,6 +654,7 @@
           </div>
         </div>
       </div>
+
       <ul id="context-menu" role="menu" class="can-hover" style="display: none">
         <li role="menuitem" tabindex="0" aria-haspopup="true">
           View
@@ -500,6 +713,7 @@
           <a href="#menu">Personalize</a>
         </li>
       </ul>
+
       <div id="icon-context-menu" class="context-menu">
         <ul role="menu" class="can-hover" style="width: 200px">
           <li id="menu-open" role="menuitem"><a href="#menu">Open</a></li>
@@ -531,6 +745,7 @@
           </li>
         </ul>
       </div>
+
       <div class="desktop-icons">
         <div class="icon" id="icon-computer">
           <img src="./images/computer-icon.ico" alt="My Computer" />
@@ -549,25 +764,76 @@
       <div id="taskbar">
         <div class="taskbar-left">
           <div id="start-button"></div>
-          <!-- Taskbar icons -->
           <div id="app-group">
             <div
               class="aero-taskbar-icon"
               id="taskbar-projects"
               style="display: none"
             >
-              <img src="./images/myprojects.ico" alt="Projects Icon" />
+              <img src="./images/myprojects.ico" alt="Projects" />
+              <div class="aero-peek"><div class="peek-thumb"></div></div>
+            </div>
 
-              <div class="aero-peek">
-                <!-- <span class="peek-title">My Projects</span> -->
-                <div class="peek-thumb"></div>
-              </div>
+            <div
+              class="aero-taskbar-icon"
+              id="taskbar-computer"
+              style="display: none"
+            >
+              <img src="./images/computer-icon.ico" alt="Computer" />
+              <div class="aero-peek"><div class="peek-thumb"></div></div>
+            </div>
+
+            <div
+              class="aero-taskbar-icon"
+              id="taskbar-recycle"
+              style="display: none"
+            >
+              <img src="./images/recycle-icon.ico" alt="Recycle Bin" />
+              <div class="aero-peek"><div class="peek-thumb"></div></div>
+            </div>
+
+            <div
+              class="aero-taskbar-icon"
+              id="taskbar-usage"
+              style="display: none"
+            >
+              <img src="./images/readme.ico" alt="Notepad" />
+              <div class="aero-peek"><div class="peek-thumb"></div></div>
+            </div>
+            <div
+              class="aero-taskbar-icon app-active"
+              id="taskbar-welcome"
+              style="display: flex"
+            >
+              <img src="./images/wizard.ico" alt="Welcome Setup" />
+              <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
           </div>
         </div>
 
         <div class="taskbar-right">
-          <div class="tray-icons"></div>
+          <div class="tray-icons">
+            <div class="tray-icons">
+              <div
+                id="tray-network"
+                class="tray-icon wlan1"
+                title="Network: Connected"
+              ></div>
+              <div
+                id="tray-volume"
+                class="tray-icon _3"
+                title="Speakers: 100%"
+              ></div>
+              <div
+                id="tray-battery"
+                class="tray-icon charging"
+                title="Battery: 100% (Plugged in)"
+                style="--percent: 100%"
+              >
+                <div id="battery-bar"></div>
+              </div>
+            </div>
+          </div>
           <div id="datetime">
             <span id="time-display"></span>
             <span id="date-display"></span>
@@ -575,6 +841,7 @@
           <div id="show-desktop-btn"></div>
         </div>
       </div>
+
       <div id="start-menu">
         <div class="start-left">
           <div class="programs-list">
