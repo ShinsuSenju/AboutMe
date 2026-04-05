@@ -136,26 +136,14 @@ startMenu.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
-// system tray
-// const trayBattery = document.getElementById("tray-battery");
+const links = document.querySelectorAll(".link-item.external");
 
-// function updateBattery(battery) {
-//   trayBattery.style.setProperty("--percent", battery.level * 100 + "%");
-//   if (battery.charging === true) {
-//     trayBattery.classList.add("charging");
-//   } else {
-//     trayBattery.classList.remove("charging");
-//   }
-//   trayBattery.title = `Battery: ${Math.round(battery.level * 100)}% ${battery.charging ? "(Plugged in)" : "(Remaining)"}`;
-// }
-
-// if ("getBattery" in navigator) {
-//   navigator.getBattery().then((battery) => {
-//     updateBattery(battery);
-//     battery.addEventListener("levelchange", () => updateBattery(battery));
-//     battery.addEventListener("chargingchange", () => updateBattery(battery));
-//   });
-// }
+links.forEach((link) => {
+  link.addEventListener("click", () => {
+    const url = link.getAttribute("data-url");
+    window.open(url, "_blank");
+  });
+});
 
 //windows
 let highestZIndex = 100;
@@ -413,13 +401,6 @@ document.getElementById("menu-source").addEventListener("click", (e) => {
   closeAllMenus();
 });
 
-// Portfolio Link: My Projects
-// document.getElementById("menu-projects").addEventListener("click", (e) => {
-//   e.preventDefault();
-//   alert("Opening Projects Window... (Coming Soon!)");
-//   closeContextMenu();
-// });
-
 const menuItemsWithSubmenus = document.querySelectorAll(
   '[aria-haspopup="true"]',
 );
@@ -447,6 +428,17 @@ menuItemsWithSubmenus.forEach((item) => {
 const projectsBtn = document.getElementById("menu-projects");
 if (projectsBtn) {
   projectsBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    openWindow("projects-window");
+    closeAllMenus();
+  });
+}
+
+const projectsStartBtn = document.querySelector(
+  '.link-item[data-app="projects"]',
+);
+if (projectsStartBtn) {
+  projectsStartBtn.addEventListener("click", (e) => {
     e.preventDefault();
     openWindow("projects-window");
     closeAllMenus();
