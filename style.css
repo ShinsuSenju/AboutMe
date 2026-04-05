@@ -472,10 +472,11 @@ button:focus {
 .window.maximized {
   top: 0 !important;
   left: 0 !important;
-  width: 100vw !important;
+  width: 100% !important;
   height: calc(100vh - var(--taskbar-height)) !important;
   border-radius: 0 !important;
 }
+
 .window.maximized .window-body {
   flex-grow: 1 !important;
   height: auto !important;
@@ -1349,4 +1350,35 @@ button:focus {
 #menu-hack,
 #menu-hack a {
   pointer-events: auto !important;
+}
+
+#computer-window,
+#projects-window,
+#recycle-window {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#computer-window.maximized .window-body,
+#projects-window.maximized .window-body,
+#recycle-window.maximized .window-body {
+  flex-grow: 1 !important;
+  height: auto !important;
+}
+
+#projects-window {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#projects-window.maximized .window-body {
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: auto !important;
+}
+
+#projects-window.maximized .wizard-tab-content {
+  flex-grow: 1 !important;
+  height: auto !important;
 }
