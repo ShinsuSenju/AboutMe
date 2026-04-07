@@ -412,10 +412,10 @@ hackBtn.addEventListener("click", (e) => {
   }
 });
 
-// Portfolio Link: View Source
+// Link: View Source
 document.getElementById("menu-source").addEventListener("click", (e) => {
   e.preventDefault();
-  window.open("https://github.com/ShinsuSenju/PersonalPortfolio", "_blank");
+  window.open("https://github.com/ShinsuSenju/AboutMe", "_blank");
   closeAllMenus();
 });
 
@@ -805,14 +805,14 @@ const fileSystem = {
   ],
   "D:": [
     {
-      name: "Windows7_Portfolio.bat",
+      name: "Windows7.bat",
       icon: "./images/bat.ico",
       type: "project",
       exists: true,
       isLive: true,
       isOpen: true,
-      github: "https://github.com/ShinsuSenju/PersonalPortfolio",
-      url: "https://shinsusenju.github.io/PersonalPortfolio/",
+      github: "https://github.com/ShinsuSenju/AboutMe",
+      url: "https://shinsusenju.github.io/AboutMe/",
     },
     {
       name: "Yelp_Campgrounds.bat",
@@ -1057,7 +1057,7 @@ function triggerProjectCmd(
         return;
       }
 
-      if (isLive && liveUrl !== "") {
+      if (isLive && liveUrl !== "" && !isOpen) {
         if (e.key === "1") {
           window.open(liveUrl, "_blank");
           cleanup();
