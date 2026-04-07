@@ -34,6 +34,20 @@
           />
           <button id="login-btn" class="blue-arrow-btn">➔</button>
         </div>
+        <div style="margin-top: 15px; text-align: center">
+          <span
+            id="guest-login"
+            style="
+              color: #ffffff;
+              font-size: 13px;
+              cursor: pointer;
+              text-decoration: underline;
+              text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            "
+          >
+            Log in as Guest (No Password)
+          </span>
+        </div>
         <p id="password-hint" class="hidden"></p>
 
         <div id="wiki-card" class="hidden">
@@ -90,7 +104,10 @@
               <button role="tab" aria-controls="proj2-wip">W.I.P</button>
             </menu>
 
-            <div class="has-scrollbar wizard-tab-content">
+            <div
+              class="has-scrollbar wizard-tab-content"
+              style="overflow-y: auto"
+            >
               <article role="tabpanel" id="proj2-port">
                 <strong>Windows 7 Portfolio</strong><br />
                 <ul>
@@ -148,11 +165,7 @@
             <div class="title-bar-controls">
               <button aria-label="Minimize" class="titlebar-min"></button>
               <button aria-label="Maximize" class="titlebar-max"></button>
-              <button
-                aria-label="Close"
-                class="titlebar-close"
-                onclick="closeWindow('welcome-window')"
-              ></button>
+              <button aria-label="Close" class="titlebar-close"></button>
             </div>
           </div>
 
@@ -178,7 +191,10 @@
 
               <div id="welcome-page-2" class="wizard-page" hidden>
                 <h3>Experience</h3>
-                <div class="has-scrollbar wizard-scroll-box">
+                <div
+                  class="has-scrollbar wizard-scroll-box"
+                  style="overflow-y: auto"
+                >
                   <fieldset>
                     <legend>Experience</legend>
                     <strong>Capgemini <em>(July 2025 - Present)</em></strong>
@@ -186,10 +202,14 @@
                     <span class="text-muted"
                       >Developed <strong>Java-based</strong> automated test
                       cases <strong>(Selenium, TestNG, Cucumber)</strong> for
-                      web and POS systems of a leading global QSR, improved
-                      regression coverage, reduced maintenance effort by
-                      <strong>~30%</strong>, validated APIs, and supported CI
-                      pipelines in an Agile environment.</span
+                      web and POS systems of a leading global QSR,
+                      <strong
+                        >improved regression coverage, reduced maintenance
+                        effort</strong
+                      >
+                      by <strong>~30%</strong>, <strong>validated APIs</strong>,
+                      and <strong>supported CI pipelines</strong> in an Agile
+                      environment.</span
                     >
                   </fieldset>
                 </div>
@@ -197,7 +217,10 @@
 
               <div id="welcome-page-3" class="wizard-page" hidden>
                 <h3>Certifications</h3>
-                <div class="has-scrollbar wizard-scroll-box cert-scroll">
+                <div
+                  class="has-scrollbar wizard-scroll-box cert-scroll"
+                  style="overflow-y: auto"
+                >
                   <fieldset>
                     <legend>Certifications</legend>
                     <strong>Google Associate Data Practitioner</strong><br />
@@ -221,7 +244,10 @@
 
               <div id="welcome-page-4" class="wizard-page" hidden>
                 <h3>Technical Skills</h3>
-                <div class="has-scrollbar wizard-scroll-box">
+                <div
+                  class="has-scrollbar wizard-scroll-box"
+                  style="overflow-y: auto"
+                >
                   <fieldset>
                     <legend>Languages & Web</legend>
                     Java, JavaScript, Node.js, HTML, CSS
@@ -254,7 +280,10 @@
                   <button role="tab" aria-controls="proj-wip">W.I.P</button>
                 </menu>
 
-                <div class="has-scrollbar wizard-tab-content">
+                <div
+                  class="has-scrollbar wizard-tab-content"
+                  style="overflow-y: auto"
+                >
                   <article role="tabpanel" id="proj-port">
                     <strong>Portfolio Website</strong><br />
                     <ul>
@@ -307,6 +336,10 @@
               <div id="welcome-page-6" class="wizard-page" hidden>
                 <h3>Setup Complete</h3>
                 <div class="hook-content">
+                  <p>Click this button to download full Resume</p>
+                  <button onclick="window.open('assets/resume.pdf', '_blank')">
+                    Download Resume
+                  </button>
                   <p>You are now ready to explore the system.</p>
                   <p><strong>Quick Tips:</strong></p>
                   <ul>
@@ -334,13 +367,7 @@
               <div class="wizard-footer">
                 <button id="wiz-back" disabled>&lt; Back</button>
                 <button id="wiz-next">Next &gt;</button>
-                <button
-                  id="wiz-finish"
-                  style="display: none"
-                  onclick="closeWindow('welcome-window')"
-                >
-                  Finish
-                </button>
+                <button id="wiz-finish" style="display: none">Finish</button>
               </div>
             </div>
           </div>
@@ -358,18 +385,8 @@
 
           <div class="win7-glass-nav">
             <div class="nav-buttons">
-              <div
-                class="win7-btn round back"
-                onclick="alert('these buttons don\'t work.')"
-              >
-                ➜
-              </div>
-              <div
-                class="win7-btn round"
-                onclick="alert('these buttons don\'t work')"
-              >
-                ➜
-              </div>
+              <div class="win7-btn round back">➜</div>
+              <div class="win7-btn round">➜</div>
             </div>
             <div class="win7-addr">
               <img
@@ -396,23 +413,12 @@
               >
                 Organize ▼
               </div>
-              <div
-                class="toolbar-item"
-                onclick="
-                  alert(
-                    'System Properties:\nStorage: 100.00 PB\nRam: 8.00 PB\nGPU: RTX 10090 - 100.00 GB',
-                  )
-                "
-              >
+              <div class="toolbar-item" onclick="openWindow('sysprop-window')">
                 System properties
               </div>
               <div
                 class="toolbar-item"
-                onclick="
-                  alert(
-                    'Uninstalling bugs...\nCleaning up Jira tickets...\nSuccess!',
-                  )
-                "
+                onclick="alert('Uninstalling myslef...\nSuccess! :\(')"
               >
                 Uninstall or change a program
               </div>
@@ -457,12 +463,8 @@
                   <div class="sidebar-header">📚 Libraries</div>
                   <ul>
                     <li><img src="./images/documents.ico" /> Documents</li>
-                    <li onclick="alert('Playing Music')">
-                      <img src="./images/music.ico" /> Music
-                    </li>
-                    <li onclick="alert('rickroll')">
-                      <img src="./images/video.ico" /> Videos
-                    </li>
+                    <li><img src="./images/music.ico" /> Music</li>
+                    <li><img src="./images/video.ico" /> Videos</li>
                   </ul>
                 </div>
 
@@ -471,9 +473,9 @@
                     <img src="./images/computer-icon.ico" width="16" /> Computer
                   </div>
                   <ul style="padding-left: 20px">
-                    <li><img src="./images/hdd2.ico" />Mind (C:)</li>
+                    <li><img src="./images/hdd2.ico" />Brain (C:)</li>
                     <li><img src="./images/hdd1.ico" />Projects (D:)</li>
-                    <li><img src="./images/hdd1.ico" />Wallet (E:)</li>
+                    <li><img src="./images/hdd1.ico" />Wallet (G:)</li>
                   </ul>
                 </div>
               </div>
@@ -482,7 +484,7 @@
                 <div class="win7-headline">Hard Disk Drives (3)</div>
                 <div class="win7-devices">
                   <div class="win7-device disk-os">
-                    <div class="name"><label>Mind (C:)</label></div>
+                    <div class="name"><label>Brain (C:)</label></div>
                     <div class="storage-bar red-bar">
                       <div style="width: 99%"></div>
                     </div>
@@ -522,7 +524,7 @@
               <div class="footer-details">
                 <strong>Guest</strong><br />
                 Processor: Intel(R) Core(TM)<br />
-                Memory: 64.00 Kb
+                Memory: 64.00 GB
               </div>
             </div>
           </div>
@@ -596,7 +598,10 @@
                 </div>
               </div>
 
-              <div class="win7-container" style="flex: 1; padding: 15px">
+              <div
+                class="win7-container"
+                style="flex: 1; padding: 15px; overflow-y: auto"
+              >
                 <div class="win7-file-grid" id="recycle-contents">
                   <div
                     class="win7-file"
@@ -650,6 +655,386 @@
               <div class="footer-details" id="recycle-footer-text">
                 4 items selected <br />
                 Total Size: 9,001 GB
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="window window-closed"
+          id="cmd-window"
+          style="
+            width: 650px;
+            height: 400px;
+            top: 20%;
+            left: 25%;
+            display: flex;
+            flex-direction: column;
+          "
+        >
+          <div class="title-bar">
+            <div class="title-bar-text">
+              <img
+                src="./images/cmd.png"
+                class="title-bar-avatar"
+                alt="cmd"
+                onerror="this.style.display = 'none'"
+              />
+              C:\Windows\system32\cmd.exe
+            </div>
+            <div class="title-bar-controls">
+              <button aria-label="Minimize" class="titlebar-min"></button>
+              <button aria-label="Maximize" class="titlebar-max"></button>
+              <button aria-label="Close" class="titlebar-close"></button>
+            </div>
+          </div>
+          <div
+            class="window-body cmd-body"
+            style="
+              flex: 1;
+              margin: 0;
+              background-color: #000;
+              padding: 5px;
+              overflow-y: auto;
+            "
+          >
+            <div id="cmd-text-area"></div>
+          </div>
+        </div>
+
+        <div
+          class="window window-closed"
+          id="notepad-window"
+          style="
+            width: 500px;
+            height: 450px;
+            top: 15%;
+            left: 30%;
+            display: flex;
+            flex-direction: column;
+          "
+        >
+          <div class="title-bar">
+            <div class="title-bar-text">
+              <img
+                src="./images/notepad.png"
+                class="title-bar-avatar"
+                alt="notepad"
+              />
+              <span id="notepad-title">Untitled - Notepad</span>
+            </div>
+            <div class="title-bar-controls">
+              <button aria-label="Minimize" class="titlebar-min"></button>
+              <button aria-label="Maximize" class="titlebar-max"></button>
+              <button aria-label="Close" class="titlebar-close"></button>
+            </div>
+          </div>
+
+          <div class="notepad-menu">
+            <span>File</span><span>Edit</span><span>Format</span
+            ><span>View</span><span>Help</span>
+          </div>
+
+          <div
+            class="window-body notepad-body"
+            style="flex: 1; margin: 0; padding: 0; display: flex"
+          >
+            <textarea
+              id="notepad-text-area"
+              readonly
+              style="
+                flex: 1;
+                border: none;
+                resize: none;
+                outline: none;
+                padding: 5px;
+                overflow-y: auto;
+              "
+            ></textarea>
+          </div>
+        </div>
+
+        <div
+          class="window window-closed"
+          id="sysprop-window"
+          style="
+            width: 780px;
+            height: 550px;
+            top: 10%;
+            left: 15%;
+            display: flex;
+            flex-direction: column;
+          "
+        >
+          <div class="title-bar">
+            <div class="title-bar-text">
+              <img
+                src="./images/computer-icon.ico"
+                class="title-bar-avatar"
+                alt="system"
+              />
+              System
+            </div>
+            <div class="title-bar-controls">
+              <button aria-label="Minimize" class="titlebar-min"></button>
+              <button aria-label="Maximize" class="titlebar-max"></button>
+              <button aria-label="Close" class="titlebar-close"></button>
+            </div>
+          </div>
+
+          <div
+            class="window-body sysprop-body"
+            style="
+              flex: 1;
+              margin: 0;
+              padding: 0;
+              display: flex;
+              flex-direction: row;
+              background-color: #f0f4f9;
+            "
+          >
+            <div
+              class="sysprop-sidebar"
+              style="
+                width: 200px;
+                background: linear-gradient(to bottom, #f0f4fa, #dce6f4);
+                padding: 20px 15px;
+                border-right: 1px solid #c2d6eb;
+              "
+            >
+              <div
+                class="sysprop-link"
+                style="
+                  color: #003399;
+                  font-size: 12px;
+                  margin-bottom: 8px;
+                  cursor: pointer;
+                "
+              >
+                <img src="./images/search.svg" width="16" /> Control Panel Home
+              </div>
+              <div
+                class="sysprop-link"
+                style="
+                  color: #003399;
+                  font-size: 12px;
+                  margin-bottom: 8px;
+                  cursor: pointer;
+                "
+              >
+                <img src="./images/search.svg" width="16" /> Device Manager
+              </div>
+              <div
+                class="sysprop-link"
+                style="
+                  color: #003399;
+                  font-size: 12px;
+                  margin-bottom: 8px;
+                  cursor: pointer;
+                "
+              >
+                <img src="./images/search.svg" width="16" /> Remote settings
+              </div>
+              <div
+                class="sysprop-link"
+                style="
+                  color: #003399;
+                  font-size: 12px;
+                  margin-bottom: 8px;
+                  cursor: pointer;
+                "
+              >
+                <img src="./images/search.svg" width="16" /> System protection
+              </div>
+              <div
+                class="sysprop-link"
+                style="
+                  color: #003399;
+                  font-size: 12px;
+                  margin-bottom: 8px;
+                  cursor: pointer;
+                "
+              >
+                <img src="./images/search.svg" width="16" /> Advanced system
+                settings
+              </div>
+            </div>
+
+            <div
+              class="sysprop-content"
+              style="
+                flex: 1;
+                background: #fff;
+                padding: 20px 30px;
+                overflow-y: auto;
+              "
+            >
+              <div
+                class="sysprop-header"
+                style="color: #003399; font-size: 15px; margin-bottom: 20px"
+              >
+                View basic information about your computer
+              </div>
+
+              <div
+                class="sysprop-section"
+                style="
+                  border-bottom: 1px solid #d9d9d9;
+                  padding-bottom: 15px;
+                  margin-bottom: 15px;
+                  font-size: 12px;
+                "
+              >
+                <h3
+                  class="sysprop-h3"
+                  style="
+                    color: #003399;
+                    font-size: 13px;
+                    font-weight: 600;
+                    margin: 0 0 10px 0;
+                  "
+                >
+                  Windows edition
+                </h3>
+                <p>
+                  Windows 7 Professional Developer Edition<br />
+                  Copyright © 2009 Microsoft Corporation. All rights reserved.
+                </p>
+                <p style="margin-top: 5px">Service Pack 1</p>
+              </div>
+
+              <div
+                class="sysprop-section"
+                style="
+                  border-bottom: 1px solid #d9d9d9;
+                  padding-bottom: 15px;
+                  margin-bottom: 15px;
+                  font-size: 12px;
+                "
+              >
+                <h3
+                  class="sysprop-h3"
+                  style="
+                    color: #003399;
+                    font-size: 13px;
+                    font-weight: 600;
+                    margin: 0 0 10px 0;
+                  "
+                >
+                  System
+                </h3>
+                <div
+                  class="sysprop-grid"
+                  style="
+                    display: grid;
+                    grid-template-columns: 180px 1fr;
+                    row-gap: 6px;
+                  "
+                >
+                  <div class="label" style="color: #555">Rating:</div>
+                  <div
+                    class="value rating-box"
+                    style="display: flex; align-items: center; gap: 10px"
+                  >
+                    <div
+                      class="wei-score"
+                      style="
+                        background-color: #2b70d4;
+                        color: white;
+                        font-size: 16px;
+                        font-weight: bold;
+                        padding: 2px 10px;
+                        border: 1px solid #003399;
+                        border-radius: 2px;
+                      "
+                    >
+                      7.9
+                    </div>
+                    <span
+                      style="
+                        color: #003399;
+                        cursor: pointer;
+                        text-decoration: underline;
+                      "
+                      >Windows Experience Index</span
+                    >
+                  </div>
+
+                  <div class="label" style="color: #555">Processor:</div>
+                  <div class="value">Intel-Core i9 @ 3.50GHz</div>
+
+                  <div class="label" style="color: #555">
+                    Installed memory (RAM):
+                  </div>
+                  <div class="value">64.0 GB</div>
+
+                  <div class="label" style="color: #555">System type:</div>
+                  <div class="value">64-bit</div>
+                </div>
+              </div>
+
+              <div
+                class="sysprop-section"
+                style="
+                  border-bottom: 1px solid #d9d9d9;
+                  padding-bottom: 15px;
+                  margin-bottom: 15px;
+                  font-size: 12px;
+                "
+              >
+                <h3
+                  class="sysprop-h3"
+                  style="
+                    color: #003399;
+                    font-size: 13px;
+                    font-weight: 600;
+                    margin: 0 0 10px 0;
+                  "
+                >
+                  Computer name, domain, and workgroup settings
+                </h3>
+                <div
+                  class="sysprop-grid"
+                  style="
+                    display: grid;
+                    grid-template-columns: 180px 1fr;
+                    row-gap: 6px;
+                  "
+                >
+                  <div class="label" style="color: #555">Computer name:</div>
+                  <div class="value">ANURAG-PC</div>
+                  <div class="label" style="color: #555">
+                    Full computer name:
+                  </div>
+                  <div class="value">ANURAG-PC.com</div>
+                  <div class="label" style="color: #555">
+                    Computer description:
+                  </div>
+                  <div class="value">Reliable Software Engineer</div>
+                </div>
+              </div>
+
+              <div
+                class="sysprop-section"
+                style="border-bottom: none; font-size: 12px"
+              >
+                <h3
+                  class="sysprop-h3"
+                  style="
+                    color: #003399;
+                    font-size: 13px;
+                    font-weight: 600;
+                    margin: 0 0 10px 0;
+                  "
+                >
+                  Windows activation
+                </h3>
+                <p>
+                  Experience Activated. Ready to Hire.<br />
+                  <span style="color: #003399; cursor: pointer"
+                    >Read the Microsoft Software License Terms</span
+                  >
+                </p>
               </div>
             </div>
           </div>
@@ -795,18 +1180,50 @@
 
             <div
               class="aero-taskbar-icon"
+              id="taskbar-cmd"
+              style="display: none"
+            >
+              <img src="./images/cmd.png" alt="cmd" />
+              <div class="aero-peek">
+                <div class="peek-thumb"></div>
+              </div>
+            </div>
+
+            <div
+              class="aero-taskbar-icon"
+              id="taskbar-notepad"
+              style="display: none"
+            >
+              <img src="./images/notepad.png" alt="notepad" />
+              <div class="aero-peek">
+                <div class="peek-thumb"></div>
+              </div>
+            </div>
+
+            <div
+              class="aero-taskbar-icon"
               id="taskbar-usage"
               style="display: none"
             >
               <img src="./images/readme.ico" alt="Notepad" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
+
             <div
               class="aero-taskbar-icon app-active"
               id="taskbar-welcome"
               style="display: flex"
             >
               <img src="./images/wizard.ico" alt="Welcome Setup" />
+              <div class="aero-peek"><div class="peek-thumb"></div></div>
+            </div>
+
+            <div
+              class="aero-taskbar-icon"
+              id="taskbar-sysprop"
+              style="display: none"
+            >
+              <img src="./images/computer-icon.ico" alt="system" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
           </div>

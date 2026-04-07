@@ -1382,3 +1382,273 @@ button:focus {
   flex-grow: 1 !important;
   height: auto !important;
 }
+
+/* cmd */
+
+#cmd-window {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.cmd-body {
+  background-color: #0c0c0c !important;
+  color: #cccccc;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 14px;
+  overflow-y: auto;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: 100% !important;
+  margin: 0 !important;
+}
+
+#cmd-window.maximized .cmd-body {
+  flex: 1 1 auto !important;
+  height: auto !important;
+}
+
+/* notepad */
+#notepad-window {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.notepad-menu {
+  background-color: #f5f6f7;
+  padding: 2px 5px;
+  border-bottom: 1px solid #d9d9d9;
+  font-size: 12px;
+  display: flex;
+  gap: 10px;
+  color: #000;
+}
+
+.notepad-menu span {
+  padding: 2px 5px;
+  cursor: default;
+}
+
+.notepad-menu span:hover {
+  background-color: #e5f3fb;
+  border: 1px solid #d8eaf9;
+  margin: -1px;
+}
+
+.notepad-body {
+  flex-grow: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  background: #fff;
+}
+
+#notepad-text-area {
+  flex-grow: 1;
+  width: 100%;
+  border: none;
+  resize: none;
+  outline: none;
+  font-family: "Consolas", "Lucida Console", monospace;
+  font-size: 14px;
+  padding: 5px;
+  background-color: #fff;
+  color: #000;
+}
+
+/* system prop */
+#sysprop-window {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.sysprop-body {
+  flex-grow: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  background-color: #f0f4f9;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.sysprop-sidebar {
+  width: 200px;
+  background: linear-gradient(to bottom, #f0f4fa, #dce6f4);
+  padding: 20px 15px;
+  border-right: 1px solid #c2d6eb;
+}
+
+.sysprop-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #003399;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.sysprop-link:hover {
+  text-decoration: underline;
+}
+
+.sysprop-content {
+  flex-grow: 1;
+  background-color: #fff;
+  padding: 20px 30px;
+  overflow-y: auto;
+}
+
+.sysprop-header {
+  font-size: 15px;
+  color: #003399;
+  margin-bottom: 20px;
+}
+
+.sysprop-section {
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  color: #333;
+}
+
+.sysprop-h3 {
+  color: #003399;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.sysprop-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  row-gap: 6px;
+}
+
+.sysprop-grid .label {
+  color: #555;
+}
+
+.rating-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wei-container {
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 10px 0;
+  margin-bottom: 15px;
+}
+
+.wei-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  color: #333;
+}
+
+.wei-table th {
+  text-align: left;
+  font-weight: normal;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e5e5;
+  color: #555;
+}
+
+.wei-table td {
+  padding: 12px 5px;
+  vertical-align: middle;
+}
+
+.wei-table .subscore {
+  text-align: center;
+  font-size: 14px;
+}
+
+.highlighted-score {
+  background-color: #e5f3fb;
+  border: 1px solid #c2d6eb;
+}
+
+.base-score-cell {
+  vertical-align: top;
+  padding-top: 15px !important;
+}
+
+.base-score-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.base-score-box {
+  background: linear-gradient(to bottom, #5b9bd5, #225c8f);
+  border-radius: 4px;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.base-score-box .big-number {
+  color: white;
+  font-size: 44px;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+
+.base-score-box .wei-watermark {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: bold;
+  z-index: 1;
+}
+
+.base-label {
+  font-size: 11px;
+  text-align: center;
+  margin-top: 8px;
+  color: #333;
+}
+
+.wei-footer-links {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wei-link-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.help-icon {
+  background: linear-gradient(to bottom, #4f81bd, #244061);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 11px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}

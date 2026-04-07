@@ -5,8 +5,8 @@ const bootText = document.querySelector(".boot-text");
 
 window.onload = () => {
   setTimeout(() => {
-    logo.style.opacity = "1";
-    bootText.style.opacity = "1";
+    if (logo) logo.style.opacity = "1";
+    if (bootText) bootText.style.opacity = "1";
   }, 500);
 
   setTimeout(() => {
@@ -84,6 +84,19 @@ passwordInput.addEventListener("keypress", (event) => {
   if (event.key === "Enter") {
     attemptLogin();
   }
+});
+
+document.getElementById("guest-login").addEventListener("click", () => {
+  loginScreen.classList.add("hidden");
+  welcomeScreen.classList.remove("hidden");
+  setTimeout(() => {
+    welcomeScreen.classList.add("hidden");
+    const audio = new Audio("./audio/startup.mp3");
+    audio.play().catch((e) => console.log("Audio Blocked"));
+    setTimeout(() => {
+      desktop.classList.remove("hidden");
+    }, 500);
+  }, 3000);
 });
 
 // DESKTOP LOGIC
@@ -176,6 +189,11 @@ function openWindow(windowId) {
   const baseName = windowId.replace("-window", "");
   const taskbarBtn = document.getElementById(`taskbar-${baseName}`);
   if (taskbarBtn) {
+    // If the icon is hidden, move it to the end of the app-group
+    if (getComputedStyle(taskbarBtn).display === "none") {
+      const appGroup = document.getElementById("app-group");
+      if (appGroup) appGroup.appendChild(taskbarBtn);
+    }
     taskbarBtn.style.display = "flex";
   }
 }
@@ -767,6 +785,339 @@ function navigateExplorer(e, targetAppId) {
   }
 }
 
+//computerWindow
+
+const fileSystem = {
+  "C:": [
+    { name: "school_edu.txt", icon: "./images/readme.ico", type: "about" },
+    { name: "college_edu.txt", icon: "./images/readme.ico", type: "about" },
+    {
+      name: "professional_exp.txt",
+      icon: "./images/readme.ico",
+      type: "about",
+    },
+    { name: "skills.txt", icon: "./images/readme.ico", type: "about" },
+    {
+      name: "certifications.txt",
+      icon: "./images/readme.ico",
+      type: "about",
+    },
+  ],
+  "D:": [
+    {
+      name: "Windows7_Portfolio.bat",
+      icon: "./images/bat.ico",
+      type: "project",
+      exists: true,
+      isLive: true,
+      isOpen: true,
+      github: "https://github.com/ShinsuSenju/PersonalPortfolio",
+      url: "https://shinsusenju.github.io/PersonalPortfolio/",
+    },
+    {
+      name: "Yelp_Campgrounds.bat",
+      icon: "./images/bat.ico",
+      type: "project",
+      exists: true,
+      isLive: false,
+      github: "https://github.com/ShinsuSenju/YelpCamp",
+      url: "https://yelpCampIndia.vercel.app",
+    },
+    {
+      name: "next_project.bat",
+      icon: "./images/bat.ico",
+      type: "project",
+      exists: false,
+      isLive: true,
+      github: "#",
+      url: "",
+    },
+  ],
+  "G:": [],
+};
+
+const textFilesContent = {
+  "school_edu.txt": `SCHOOL EDUCATION
+================
+
+Intermediate (12th Grade)
+School: Army Public School, Shankar Vihar, New Delhi
+Session: 2019-2020
+Percentage: 82%
+
+Matriculation (10th Grade)
+School: Army Public School, Shankar Vihar, New Delhi
+Session: 2017-2018
+Percentage: 88%`,
+
+  "college_edu.txt": `COLLEGE EDUCATION
+=================
+
+Degree: Bachelors in Engineering (Computer Science)
+University: Chandigarh University (CU), Ajitgarh, Punjab
+Session: 2021-2025
+CGPA: 8.24`,
+
+  "professional_exp.txt": `SUMMARY
+=======
+Automation Test Engineer with hands-on experience in Java-based test automation using Selenium WebDriver, TestNG, and Cucumber. Strong understanding of SDLC/STLC, functional and regression testing, and API validation. Motivated to contribute to high-quality, reliable software.
+
+PROFESSIONAL EXPERIENCE
+=======================
+Company: Capgemini Technology Services India Limited (Pune)
+Role: Analyst
+Duration: Jul 2025 - PRESENT
+
+Key Responsibilities:
+- Designed and implemented 20+ Java-based automated test cases using Selenium WebDriver, TestNG, and Cucumber for web and POS workflows.
+- Executed functional, regression, and smoke testing aligned with SDLC/STLC processes.
+- Refactored automation components using reusable design patterns, reducing maintenance effort by ~30% and improving execution reliability.
+- Validated backend logic by testing API responses, data consistency, and business rules.
+- Contributed to CI-ready automation suites using Git and Maven.
+- Performed defect analysis, root cause investigation, and coordinated with developers.`,
+
+  "skills.txt": `TECHNICAL SKILLS
+================
+
+Programming Languages:
+- Java
+- JavaScript
+
+Test Automation & Tools:
+- Selenium WebDriver
+- TestNG
+- Cucumber
+- Postman
+- JMeter
+
+Web & Databases:
+- Node.js
+- MongoDB
+
+DevOps & Version Control:
+- Git
+- Maven
+- Jenkins`,
+
+  "certifications.txt": `CERTIFICATIONS
+==============
+
+Google Associate Data Practitioner
+- Working knowledge of SQL, BigQuery, and Looker for data querying, transformation, and visualization. Experienced in modern data workflows and analytical best practices.
+
+Java Programming (Learn Quest)
+- Focused on Java features, functions, and building fully functional Java web and mobile applications.
+
+Cloud Computing (NPTEL)
+- Solid understanding of core cloud concepts including cloud architecture, service models (IaaS, PaaS, SaaS), virtualization, and deployment models.`,
+};
+
+const computerWindow = document.querySelector(
+  "#computer-window .win7-container",
+);
+const addressBar = document.querySelector("#computer-window .win7-addr");
+const backBtn = document.querySelector("#computer-window .win7-btn.back");
+
+let originalcomputerWindowHTML = "";
+if (computerWindow) {
+  originalcomputerWindowHTML = computerWindow.innerHTML;
+}
+
+function openDrive(driveLetter) {
+  addressBar.innerHTML = `Computer <span style="color:#666; margin:0 5px;">▸</span> Local Disk (${driveLetter})`;
+
+  if (fileSystem[driveLetter] && fileSystem[driveLetter].length > 0) {
+    let filesHTML = `<div class="win7-file-grid" style="margin-top: 15px;">`;
+    fileSystem[driveLetter].forEach((file) => {
+      filesHTML += `
+        <div class="win7-file" data-type="${file.type}" data-name="${file.name}">
+          <img src="${file.icon}" alt="icon" onerror="this.src='./images/search.svg'">
+          <span>${file.name}</span>
+        </div>
+      `;
+    });
+    filesHTML += `</div>`;
+    computerWindow.innerHTML = filesHTML;
+  } else {
+    computerWindow.innerHTML = `
+      <div style="padding: 20px; color: #777; font-size: 12px; font-style: italic;">
+        This folder is empty. (Wish I had more in here...)
+      </div>
+    `;
+  }
+
+  bindFile();
+}
+function bindDrive() {
+  document
+    .querySelectorAll("#computer-window .win7-device")
+    .forEach((drive) => {
+      drive.addEventListener("dblclick", (e) => {
+        const driveText = drive.querySelector(".name").innerText;
+        if (driveText.includes("C:")) openDrive("C:");
+        if (driveText.includes("D:")) openDrive("D:");
+        if (driveText.includes("F:")) openDrive("F:");
+        if (driveText.includes("G:")) openDrive("G:");
+      });
+    });
+}
+bindDrive();
+function bindFile() {
+  document.querySelectorAll("#computer-window .win7-file").forEach((file) => {
+    file.addEventListener("dblclick", () => {
+      const type = file.dataset.type;
+      const name = file.dataset.name;
+
+      if (type === "project") {
+        const projectData = fileSystem["D:"].find((f) => f.name === name);
+        if (projectData) {
+          triggerProjectCmd(
+            name,
+            projectData.isLive,
+            projectData.github,
+            projectData.url,
+            projectData.isOpen,
+            projectData.exists,
+          );
+        }
+      } else if (type === "about") {
+        openNotepad(name);
+      } else if (type === "music") {
+        alert(`Playing ${name}... (I still need to build the Media Player!)`);
+      } else {
+        alert(`Unknown file type: ${name}`);
+      }
+    });
+  });
+}
+
+if (backBtn) {
+  backBtn.addEventListener("click", () => {
+    if (addressBar.innerText !== "Computer") {
+      computerWindow.innerHTML = originalcomputerWindowHTML;
+      addressBar.innerText = "Computer";
+      bindDrive();
+    }
+  });
+}
+let activeCmdListener = null;
+function triggerProjectCmd(
+  projectName,
+  isLive,
+  githubLink,
+  liveUrl,
+  isOpen,
+  exists,
+) {
+  openWindow("cmd-window");
+  const terminal = document.getElementById("cmd-text-area");
+  if (!terminal) return;
+  terminal.innerHTML = `C:\\Users\\Anurag> executing ${projectName}<br>`;
+  terminal.innerHTML += `Pinging ${liveUrl} with 32 bytes of data:<br><br>`;
+  let isAwaitingInput = false;
+  setTimeout(() => {
+    if (isLive && liveUrl !== "" && isOpen) {
+      terminal.innerHTML += `Reply from ${isLive ? liveUrl : projectName}: bytes=32 time=14ms TTL=119<br>`;
+      terminal.innerHTML += `Reply from ${isLive ? liveUrl : projectName}: bytes=32 time=15ms TTL=119<br><br>`;
+      terminal.innerHTML += `<span style="color: #00ff00;">STATUS: ONLINE</span><br>`;
+      terminal.innerHTML += `Wait a second... you are already browsing this project right now!<br><br>`;
+      terminal.innerHTML += `> Press <strong>[ENTER]</strong> to view the Source Code.<br>`;
+    } else if (isLive && liveUrl !== "") {
+      terminal.innerHTML += `Reply from ${isLive ? liveUrl : projectName}: bytes=32 time=14ms TTL=119<br>`;
+      terminal.innerHTML += `Reply from ${isLive ? liveUrl : projectName}: bytes=32 time=15ms TTL=119<br><br>`;
+      terminal.innerHTML += `<span style="color: #00ff00;">STATUS: ONLINE</span><br>`;
+      terminal.innerHTML += `> Press <strong>[1]</strong> to visit the Live Site.<br>`;
+      terminal.innerHTML += `> Press <strong>[2]</strong> to view the Source Code.<br>`;
+    } else if (!exists) {
+      terminal.innerHTML += `Request timed out.<br>`;
+      terminal.innerHTML += `Request timed out.<br><br>`;
+      terminal.innerHTML += `<span style="color: #ff3333;">STATUS: OFFLINE</span><br>`;
+      terminal.innerHTML += `Hey! I guess this project is still Work In Progress.<br>`;
+      terminal.innerHTML += `> Press <strong>[ENTER]</strong> to Close this window.<br>`;
+    } else {
+      terminal.innerHTML += `Request timed out.<br>`;
+      terminal.innerHTML += `Request timed out.<br><br>`;
+      terminal.innerHTML += `<span style="color: #ff3333;">STATUS: OFFLINE</span><br>`;
+      terminal.innerHTML += `The servers for this project have been spun down, but the code lives on.<br><br>`;
+      terminal.innerHTML += `> Press <strong>[ENTER]</strong> to view the Source Code.<br>`;
+    }
+
+    terminal.scrollTop = terminal.scrollHeight;
+    isAwaitingInput = true;
+
+    if (activeCmdListener) {
+      document.removeEventListener("keydown", activeCmdListener);
+    }
+
+    activeCmdListener = (e) => {
+      if (!isAwaitingInput) return;
+
+      const cmdWindow = document.getElementById("cmd-window");
+      if (!cmdWindow || !cmdWindow.classList.contains("active")) {
+        return;
+      }
+
+      if (isLive && liveUrl !== "") {
+        if (e.key === "1") {
+          window.open(liveUrl, "_blank");
+          cleanup();
+        } else if (e.key === "2") {
+          window.open(githubLink, "_blank");
+          cleanup();
+        }
+      } else {
+        if (e.key === "Enter") {
+          if (exists) {
+            window.open(githubLink, "_blank");
+          }
+          cleanup();
+        }
+      }
+    };
+
+    function cleanup() {
+      isAwaitingInput = false;
+      if (activeCmdListener) {
+        document.removeEventListener("keydown", activeCmdListener);
+        activeCmdListener = null;
+      }
+      closeWindow("cmd-window");
+    }
+
+    document.addEventListener("keydown", activeCmdListener);
+  }, 1500);
+}
+
+function bindSidebarLinks() {
+  document.querySelectorAll(".explorer-sidebar li").forEach((link) => {
+    link.addEventListener("click", () => {
+      document
+        .querySelectorAll(".explorer-sidebar li")
+        .forEach((l) => (l.style.backgroundColor = "transparent"));
+      link.style.backgroundColor = "#e5f3fb";
+
+      const text = link.innerText.trim();
+
+      if (text === "My Computer" || text === "Computer") {
+        computerWindow.innerHTML = originalcomputerWindowHTML;
+        addressBar.innerText = "Computer";
+        bindDrive();
+      } else if (text === "Documents" || text.includes("C:")) {
+        openDrive("C:");
+      } else if (text.includes("D:")) {
+        openDrive("D:");
+      } else if (text.includes("Wallet") || text.includes("G:")) {
+        openDrive("G:");
+      } else if (text === "Videos") {
+        window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+      } else if (text === "Music") {
+        alert("Playing OST... (Audio player coming soon!)");
+      }
+    });
+  });
+}
+bindSidebarLinks();
+
 //  welcome window
 let currentWizPage = 1;
 const totalWizPages = 6;
@@ -847,3 +1198,17 @@ tabButtons.forEach((button) => {
     }
   });
 });
+
+//notepad
+
+function openNotepad(fileName) {
+  const content = textFilesContent[fileName] || "File is empty or corrupted.";
+
+  const titleEl = document.getElementById("notepad-title");
+  const textEl = document.getElementById("notepad-text-area");
+
+  if (titleEl) titleEl.innerText = `${fileName} - Notepad`;
+  if (textEl) textEl.value = content;
+
+  openWindow("notepad-window");
+}
