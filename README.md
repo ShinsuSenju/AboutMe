@@ -1,13 +1,13 @@
-# Windows 7 Portfolio
+# Windows 7
 
 Live:
-https://shinsusenju.github.io/PersonalPortfolio/
+https://shinsusenju.github.io/AboutMe/
 
 ## About
 
-A Windows 7–style portfolio.
+A Windows 7 simulator used as my portfolio.
 
-Built to experiment with DOM and state-driven behavior in plain JavaScript.
+Built to explore DOM interactions and state-driven behavior in plain JavaScript.
 
 ## Tech
 
