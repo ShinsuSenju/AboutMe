@@ -424,7 +424,7 @@ ENTER<!doctype html>
               </div>
               <div
                 class="toolbar-item"
-                onclick="alert('Uninstalling myslef...\nSuccess! :\(')"
+                onclick="alert('Uninstalling myself...\nSuccess! :\(')"
               >
                 Uninstall or change a program
               </div>
@@ -702,7 +702,54 @@ ENTER<!doctype html>
               overflow-y: auto;
             "
           >
-            <div id="cmd-text-area"></div>
+            <div
+              class="window-body cmd-body"
+              style="
+                flex: 1;
+                margin: 0;
+                background-color: #000;
+                padding: 5px;
+                overflow-y: auto;
+                font-family: &quot;Consolas&quot;, monospace;
+                font-size: 13px;
+                color: #ccc;
+                cursor: text;
+              "
+            >
+              <div
+                id="cmd-content"
+                style="display: flex; flex-direction: column; min-height: 100%"
+              >
+                <div id="cmd-history">
+                  Microsoft Windows [Version 6.1.7601]<br />
+                  Copyright (c) 2009 Microsoft Corporation. All rights
+                  reserved.<br /><br />
+                </div>
+                <div
+                  id="cmd-input-line"
+                  style="display: flex; align-items: center; margin-top: 5px"
+                >
+                  <span id="cmd-prompt" style="margin-right: 8px"
+                    >C:\Users\Anurag&gt;</span
+                  >
+                  <input
+                    type="text"
+                    id="cmd-input"
+                    autocomplete="off"
+                    spellcheck="false"
+                    style="
+                      flex: 1;
+                      background: transparent;
+                      border: none;
+                      color: #fff;
+                      font-family: &quot;Consolas&quot;, monospace;
+                      font-size: 13px;
+                      outline: none;
+                    "
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -745,6 +792,7 @@ ENTER<!doctype html>
           >
             <textarea
               id="notepad-text-area"
+              class="has-scrollbar"
               readonly
               style="
                 flex: 1;

@@ -158,6 +158,17 @@ links.forEach((link) => {
   });
 });
 
+document.querySelectorAll(".program-item").forEach((item) => {
+  item.addEventListener("click", () => {
+    const appId = item.getAttribute("data-app");
+    if (appId === "cmd") {
+      openWindow("cmd-window");
+    } else {
+      alert("App not installed yet!");
+    }
+    startMenu.classList.remove("show");
+  });
+});
 //windows
 let highestZIndex = 100;
 
@@ -189,7 +200,6 @@ function openWindow(windowId) {
   const baseName = windowId.replace("-window", "");
   const taskbarBtn = document.getElementById(`taskbar-${baseName}`);
   if (taskbarBtn) {
-    // If the icon is hidden, move it to the end of the app-group
     if (getComputedStyle(taskbarBtn).display === "none") {
       const appGroup = document.getElementById("app-group");
       if (appGroup) appGroup.appendChild(taskbarBtn);
@@ -1000,93 +1010,6 @@ if (backBtn) {
     }
   });
 }
-let activeCmdListener = null;
-function triggerProjectCmd(
-  projectName,
-  isLive,
-  githubLink,
-  liveUrl,
-  isOpen,
-  exists,
-) {
-  openWindow("cmd-window");
-  const terminal = document.getElementById("cmd-text-area");
-  if (!terminal) return;
-  terminal.innerHTML = `C:\\Users\\Anurag> executing ${projectName}<br>`;
-  terminal.innerHTML += `Pinging ${liveUrl} with 32 bytes of data:<br><br>`;
-  let isAwaitingInput = false;
-  setTimeout(() => {
-    if (isLive && liveUrl !== "" && isOpen) {
-      terminal.innerHTML += `Reply from ${isLive ? liveUrl : projectName}: bytes=32 time=14ms TTL=119<br>`;
-      terminal.innerHTML += `Reply from ${isLive ? liveUrl : projectName}: bytes=32 time=15ms TTL=119<br><br>`;
-      terminal.innerHTML += `<span style="color: #00ff00;">STATUS: ONLINE</span><br>`;
-      terminal.innerHTML += `Wait a second... you are already browsing this project right now!<br><br>`;
-      terminal.innerHTML += `> Press <strong>[ENTER]</strong> to view the Source Code.<br>`;
-    } else if (isLive && liveUrl !== "") {
-      terminal.innerHTML += `Reply from ${isLive ? liveUrl : projectName}: bytes=32 time=14ms TTL=119<br>`;
-      terminal.innerHTML += `Reply from ${isLive ? liveUrl : projectName}: bytes=32 time=15ms TTL=119<br><br>`;
-      terminal.innerHTML += `<span style="color: #00ff00;">STATUS: ONLINE</span><br>`;
-      terminal.innerHTML += `> Press <strong>[1]</strong> to visit the Live Site.<br>`;
-      terminal.innerHTML += `> Press <strong>[2]</strong> to view the Source Code.<br>`;
-    } else if (!exists) {
-      terminal.innerHTML += `Request timed out.<br>`;
-      terminal.innerHTML += `Request timed out.<br><br>`;
-      terminal.innerHTML += `<span style="color: #ff3333;">STATUS: OFFLINE</span><br>`;
-      terminal.innerHTML += `Hey! I guess this project is still Work In Progress.<br>`;
-      terminal.innerHTML += `> Press <strong>[ENTER]</strong> to Close this window.<br>`;
-    } else {
-      terminal.innerHTML += `Request timed out.<br>`;
-      terminal.innerHTML += `Request timed out.<br><br>`;
-      terminal.innerHTML += `<span style="color: #ff3333;">STATUS: OFFLINE</span><br>`;
-      terminal.innerHTML += `The servers for this project have been spun down, but the code lives on.<br><br>`;
-      terminal.innerHTML += `> Press <strong>[ENTER]</strong> to view the Source Code.<br>`;
-    }
-
-    terminal.scrollTop = terminal.scrollHeight;
-    isAwaitingInput = true;
-
-    if (activeCmdListener) {
-      document.removeEventListener("keydown", activeCmdListener);
-    }
-
-    activeCmdListener = (e) => {
-      if (!isAwaitingInput) return;
-
-      const cmdWindow = document.getElementById("cmd-window");
-      if (!cmdWindow || !cmdWindow.classList.contains("active")) {
-        return;
-      }
-
-      if (isLive && liveUrl !== "" && !isOpen) {
-        if (e.key === "1") {
-          window.open(liveUrl, "_blank");
-          cleanup();
-        } else if (e.key === "2") {
-          window.open(githubLink, "_blank");
-          cleanup();
-        }
-      } else {
-        if (e.key === "Enter") {
-          if (exists) {
-            window.open(githubLink, "_blank");
-          }
-          cleanup();
-        }
-      }
-    };
-
-    function cleanup() {
-      isAwaitingInput = false;
-      if (activeCmdListener) {
-        document.removeEventListener("keydown", activeCmdListener);
-        activeCmdListener = null;
-      }
-      closeWindow("cmd-window");
-    }
-
-    document.addEventListener("keydown", activeCmdListener);
-  }, 1500);
-}
 
 function bindSidebarLinks() {
   document.querySelectorAll(".explorer-sidebar li").forEach((link) => {
@@ -1117,6 +1040,211 @@ function bindSidebarLinks() {
   });
 }
 bindSidebarLinks();
+
+//cmd
+
+const cmdHistory = document.getElementById("cmd-history");
+const cmdInput = document.getElementById("cmd-input");
+const cmdBody = document.querySelector(".cmd-body");
+const cmdInputLine = document.getElementById("cmd-input-line");
+let isAwaitingInput = false;
+
+if (cmdBody) {
+  cmdBody.addEventListener("click", () => {
+    if (cmdInput && !cmdInput.disabled) cmdInput.focus();
+  });
+}
+
+function printToCmd(htmlText) {
+  if (!cmdHistory) return;
+  cmdHistory.innerHTML += `<div>${htmlText}</div>`;
+  if (cmdBody) cmdBody.scrollTop = cmdBody.scrollHeight;
+}
+if (cmdInput) {
+  cmdInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !isAwaitingInput) {
+      const cmd = cmdInput.value.trim();
+
+      printToCmd(
+        `<span style="color: #ccc;">C:\\Users\\Anurag&gt;</span> ${cmd}`,
+      );
+      cmdInput.value = "";
+      if (cmd) processCommand(cmd);
+    }
+  });
+}
+
+let currentAudio = null;
+function processCommand(cmd) {
+  const args = cmd.toLowerCase().split(" ");
+  const mainCmd = args[0];
+
+  switch (mainCmd) {
+    case "help":
+      printToCmd(
+        "Available commands:<br>" +
+          "&nbsp;&nbsp;help&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Show this menu<br>" +
+          "&nbsp;&nbsp;clear&nbsp;&nbsp;&nbsp;&nbsp;- Clear the terminal<br>" +
+          "&nbsp;&nbsp;resume&nbsp;&nbsp;&nbsp;- Open my resume<br>" +
+          "&nbsp;&nbsp;linkedin&nbsp;- Visit my LinkedIn profile<br>" +
+          "&nbsp;&nbsp;leetcode&nbsp;- Visit my LeetCode profile<br>" +
+          "&nbsp;&nbsp;books&nbsp;&nbsp;&nbsp;&nbsp;- List books I'm currently reading<br>" +
+          "&nbsp;&nbsp;music&nbsp;&nbsp;&nbsp;&nbsp;- Play/Stop coding music<br>" +
+          "&nbsp;&nbsp;pacman&nbsp;&nbsp;&nbsp;- Play ASCII Pacman<br>" +
+          "&nbsp;&nbsp;kamui&nbsp;&nbsp;&nbsp;&nbsp;- [RESTRICTED ACCESS]",
+      );
+      break;
+    case "clear":
+      cmdHistory.innerHTML = "";
+      break;
+    case "resume":
+      window.open("assets/resume.pdf", "_blank");
+      printToCmd("Opening Resume...");
+      break;
+    case "linkedin":
+      window.open("https://linkedin.com/in/senpaishane", "_blank");
+      printToCmd("Opening LinkedIn...");
+      break;
+    case "leetcode":
+      window.open("https://leetcode.com/senpaishane", "_blank");
+      printToCmd("Opening LeetCode...");
+      break;
+    case "books":
+      printToCmd(
+        "Reading List:<br>" +
+          "1. Siege And Storm - Leigh Bardugo<br>" +
+          "2. Ruin And Rising - Leigh Bardugo<br>" +
+          "3. King Of Scars - Leigh Bardugo",
+      );
+      break;
+    case "music":
+      if (currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        printToCmd("Music stopped.");
+      } else {
+        printToCmd(
+          "Loading OST Track... (Add an mp3 to /audio/ost.mp3 to make this work!)",
+        );
+        // currentAudio = new Audio("./audio/ost.mp3");
+        // currentAudio.play();
+      }
+      break;
+    case "pacman":
+      printToCmd(
+        "<br>" +
+          "&nbsp;&nbsp;&nbsp;<span style='color:yellow'>ᗧ</span>&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;<span style='color:red'>👻</span><br>" +
+          "<br>Use arrow keys to play! (Just kidding, still W.I.P)",
+      );
+      break;
+    case "kamui":
+      printToCmd(
+        "<span style='color: #ff3333;'>Mangekyou Sharingan Activated...</span>",
+      );
+      isAwaitingInput = true;
+      cmdInput.disabled = true;
+      setTimeout(() => {
+        const win = document.getElementById("cmd-window");
+        win.classList.add("kamui-effect");
+
+        setTimeout(() => {
+          closeWindow("cmd-window");
+          win.classList.remove("kamui-effect");
+          cmdHistory.innerHTML =
+            "Microsoft Windows [Version 6.1.7601]<br>Copyright (c) 2009 Microsoft Corporation.  All rights reserved.<br><br>";
+          isAwaitingInput = false;
+          cmdInput.disabled = false;
+          if (cmdInputLine) cmdInputLine.style.display = "flex";
+        }, 1300);
+      }, 800);
+      break;
+    default:
+      printToCmd(
+        `'${mainCmd}' is not recognized as an internal or external command, operable program or batch file.</br>Type 'help' to see a list of available commands.`,
+      );
+  }
+  if (cmdBody) cmdBody.scrollTop = cmdBody.scrollHeight;
+}
+
+let activeCmdListener = null;
+
+function triggerProjectCmd(
+  projectName,
+  isLive,
+  githubLink,
+  liveUrl,
+  isOpen,
+  exists,
+) {
+  openWindow("cmd-window");
+  if (!cmdHistory) return;
+
+  if (cmdInputLine) cmdInputLine.style.display = "none";
+  if (cmdInput) cmdInput.disabled = true;
+
+  printToCmd(`C:\\Users\\Anurag> executing ${projectName}`);
+  printToCmd(`Pinging ${liveUrl || projectName} with 32 bytes of data:<br>`);
+
+  isAwaitingInput = true;
+
+  setTimeout(() => {
+    if (isLive && liveUrl !== "" && isOpen) {
+      printToCmd(
+        `Reply from ${liveUrl}: bytes=32 time=14ms TTL=119<br>Reply from ${liveUrl}: bytes=32 time=15ms TTL=119<br><br><span style="color: #00ff00;">STATUS: ONLINE</span><br>Wait... you are already browsing this project!<br>> Press <strong>[ENTER]</strong> for Source Code.<br>`,
+      );
+    } else if (isLive && liveUrl !== "") {
+      printToCmd(
+        `Reply from ${liveUrl}: bytes=32 time=14ms TTL=119<br>Reply from ${liveUrl}: bytes=32 time=15ms TTL=119<br><br><span style="color: #00ff00;">STATUS: ONLINE</span><br>> Press <strong>[1]</strong> for Live Site | <strong>[2]</strong> for Source Code<br>`,
+      );
+    } else if (!exists) {
+      printToCmd(
+        `Request timed out.<br>Request timed out.<br><br><span style="color: #ff3333;">STATUS: OFFLINE</span><br>Hey! I guess this project is still Work In Progress.<br>> Press <strong>[ENTER]</strong> to Close.<br>`,
+      );
+    } else {
+      printToCmd(
+        `Request timed out.<br>Request timed out.<br><br><span style="color: #ff3333;">STATUS: OFFLINE</span><br>Servers spun down. Code remains.<br>> Press <strong>[ENTER]</strong> for Source Code.<br>`,
+      );
+    }
+
+    if (activeCmdListener)
+      document.removeEventListener("keydown", activeCmdListener);
+
+    activeCmdListener = (e) => {
+      if (
+        !isAwaitingInput ||
+        !document.getElementById("cmd-window")?.classList.contains("active")
+      )
+        return;
+
+      if (isLive && liveUrl !== "" && !isOpen) {
+        if (e.key === "1") {
+          window.open(liveUrl, "_blank");
+          cleanup();
+        }
+        if (e.key === "2") {
+          window.open(githubLink, "_blank");
+          cleanup();
+        }
+      } else if (e.key === "Enter") {
+        if (exists) window.open(githubLink, "_blank");
+        cleanup();
+      }
+    };
+
+    function cleanup() {
+      isAwaitingInput = false;
+      document.removeEventListener("keydown", activeCmdListener);
+      activeCmdListener = null;
+      closeWindow("cmd-window");
+
+      cmdHistory.innerHTML =
+        "Microsoft Windows [Version 6.1.7601]<br>Copyright (c) 2009 Microsoft Corporation.  All rights reserved.<br><br>";
+      if (cmdInputLine) cmdInputLine.style.display = "flex";
+      if (cmdInput) cmdInput.disabled = false;
+    }
+
+    document.addEventListener("keydown", activeCmdListener);
+  }, 1500);
+}
 
 //  welcome window
 let currentWizPage = 1;
@@ -1212,3 +1340,5 @@ function openNotepad(fileName) {
 
   openWindow("notepad-window");
 }
+
+// cmd
