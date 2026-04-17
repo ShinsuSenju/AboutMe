@@ -1836,3 +1836,33 @@ button:focus {
   margin-top: 15px;
   font-size: 14px;
 }
+
+/* update */
+#update-window {
+  width: 420px;
+  height: 220px;
+  top: 35%;
+  left: 35%;
+}
+
+.update-body {
+  padding: 30px;
+  text-align: center;
+  background: #fff;
+  height: calc(100% - 35px);
+  box-sizing: border-box;
+}
+
+.update-title {
+  font-weight: normal;
+  margin-bottom: 25px;
+  color: #003399;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 22px;
+}
+
+.update-status {
+  font-size: 13px;
+  color: #333;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}

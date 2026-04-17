@@ -1,0 +1,56 @@
+{
+  "fileSystem": {
+    "C:": [
+      {
+        "name": "school_edu.txt",
+        "icon": "./images/readme.ico",
+        "type": "about"
+      },
+      {
+        "name": "college_edu.txt",
+        "icon": "./images/readme.ico",
+        "type": "about"
+      },
+      {
+        "name": "professional_exp.txt",
+        "icon": "./images/readme.ico",
+        "type": "about"
+      },
+      { "name": "skills.txt", "icon": "./images/readme.ico", "type": "about" },
+      {
+        "name": "certifications.txt",
+        "icon": "./images/readme.ico",
+        "type": "about"
+      }
+    ],
+    "D:": [
+      {
+        "name": "Windows7.bat",
+        "icon": "./images/bat.ico",
+        "type": "project",
+        "exists": true,
+        "isLive": true,
+        "isOpen": true,
+        "github": "https://github.com/ShinsuSenju/AboutMe",
+        "url": "https://shinsusenju.github.io/AboutMe/"
+      },
+      {
+        "name": "Yelp_Campgrounds.bat",
+        "icon": "./images/bat.ico",
+        "type": "project",
+        "exists": true,
+        "isLive": false,
+        "github": "https://github.com/ShinsuSenju/YelpCamp",
+        "url": "https://yelpCampIndia.vercel.app"
+      }
+    ],
+    "G:": []
+  },
+  "textFilesContent": {
+    "school_edu.txt": "SCHOOL EDUCATION\n================\n\nIntermediate (12th Grade)\nSchool: Army Public School, Shankar Vihar, New Delhi\nSession: 2019-2020\nPercentage: 82%",
+    "college_edu.txt": "COLLEGE EDUCATION\n=================\n\nDegree: Bachelors in Engineering (Computer Science)\nUniversity: Chandigarh University (CU), Ajitgarh, Punjab\nSession: 2021-2025\nCGPA: 8.24",
+    "professional_exp.txt": "SUMMARY\n=======\nAutomation Test Engineer with hands-on experience in Java-based test automation using Selenium WebDriver, TestNG, and Cucumber.",
+    "skills.txt": "TECHNICAL SKILLS\n================\n\nProgramming Languages:\n- Java\n- JavaScript",
+    "certifications.txt": "CERTIFICATIONS\n==============\n\nGoogle Associate Data Practitioner\n- Working knowledge of SQL, BigQuery, and Looker."
+  }
+}

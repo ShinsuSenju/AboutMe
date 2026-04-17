@@ -1218,6 +1218,40 @@
             </div>
           </div>
         </div>
+
+        <div class="window window-closed" id="update-window">
+          <div class="title-bar">
+            <div class="title-bar-text">
+              <img
+                src="./images/windows_update_icon.avif"
+                width="15px"
+                alt="Update"
+              />
+              Windows Update
+            </div>
+            <div class="title-bar-controls">
+              <button aria-label="Minimize" class="titlebar-min"></button>
+              <button aria-label="Close" class="titlebar-close"></button>
+            </div>
+          </div>
+          <div class="window-body update-body">
+            <h3 class="update-title">Downloading Updates...</h3>
+
+            <div
+              role="progressbar"
+              class="animate"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              id="update-progress-container"
+              style="margin-bottom: 15px"
+            >
+              <div id="update-progress-bar" style="width: 0%"></div>
+            </div>
+
+            <p id="update-status-text" class="update-status">0% complete</p>
+          </div>
+        </div>
       </div>
 
       <ul id="context-menu" role="menu" class="can-hover" style="display: none">
@@ -1320,9 +1354,9 @@
           <img src="./images/recycle-icon.ico" alt="Recycle Bin" />
           <span>Recycle Bin</span>
         </div>
-        <div class="icon" id="icon-usage">
-          <img src="./images/readme.ico" alt="Text File" />
-          <span>usage.txt</span>
+        <div class="icon" id="icon-update">
+          <img src="./images/windows_update_icon.avif" alt="Windows Update" />
+          <span>Windows Update</span>
         </div>
       </div>
 
@@ -1336,6 +1370,15 @@
               style="display: none"
             >
               <img src="./images/myprojects.ico" alt="Projects" />
+              <div class="aero-peek"><div class="peek-thumb"></div></div>
+            </div>
+
+            <div
+              class="aero-taskbar-icon"
+              id="taskbar-update"
+              style="display: none"
+            >
+              <img src="./images/windows_update_icon.avif" alt="Update" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
 

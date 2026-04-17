@@ -797,130 +797,27 @@ function navigateExplorer(e, targetAppId) {
 
 //computerWindow
 
-const fileSystem = {
-  "C:": [
-    { name: "school_edu.txt", icon: "./images/readme.ico", type: "about" },
-    { name: "college_edu.txt", icon: "./images/readme.ico", type: "about" },
-    {
-      name: "professional_exp.txt",
-      icon: "./images/readme.ico",
-      type: "about",
-    },
-    { name: "skills.txt", icon: "./images/readme.ico", type: "about" },
-    {
-      name: "certifications.txt",
-      icon: "./images/readme.ico",
-      type: "about",
-    },
-  ],
-  "D:": [
-    {
-      name: "Windows7.bat",
-      icon: "./images/bat.ico",
-      type: "project",
-      exists: true,
-      isLive: true,
-      isOpen: true,
-      github: "https://github.com/ShinsuSenju/AboutMe",
-      url: "https://shinsusenju.github.io/AboutMe/",
-    },
-    {
-      name: "Yelp_Campgrounds.bat",
-      icon: "./images/bat.ico",
-      type: "project",
-      exists: true,
-      isLive: false,
-      github: "https://github.com/ShinsuSenju/YelpCamp",
-      url: "https://yelpCampIndia.vercel.app",
-    },
-    {
-      name: "next_project.bat",
-      icon: "./images/bat.ico",
-      type: "project",
-      exists: false,
-      isLive: true,
-      github: "#",
-      url: "",
-    },
-  ],
-  "G:": [],
-};
+let fileSystem = {};
+let textFilesContent = {};
 
-const textFilesContent = {
-  "school_edu.txt": `SCHOOL EDUCATION
-================
+async function loadPortfolioData() {
+  try {
+    const response = await fetch("./data.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
 
-Intermediate (12th Grade)
-School: Army Public School, Shankar Vihar, New Delhi
-Session: 2019-2020
-Percentage: 82%
+    fileSystem = data.fileSystem;
+    textFilesContent = data.textFilesContent;
 
-Matriculation (10th Grade)
-School: Army Public School, Shankar Vihar, New Delhi
-Session: 2017-2018
-Percentage: 88%`,
+    console.log("Portfolio data loaded successfully!");
+  } catch (error) {
+    console.error("Could not load data.json:", error);
+  }
+}
 
-  "college_edu.txt": `COLLEGE EDUCATION
-=================
-
-Degree: Bachelors in Engineering (Computer Science)
-University: Chandigarh University (CU), Ajitgarh, Punjab
-Session: 2021-2025
-CGPA: 8.24`,
-
-  "professional_exp.txt": `SUMMARY
-=======
-Automation Test Engineer with hands-on experience in Java-based test automation using Selenium WebDriver, TestNG, and Cucumber. Strong understanding of SDLC/STLC, functional and regression testing, and API validation. Motivated to contribute to high-quality, reliable software.
-
-PROFESSIONAL EXPERIENCE
-=======================
-Company: Capgemini Technology Services India Limited (Pune)
-Role: Analyst
-Duration: Jul 2025 - PRESENT
-
-Key Responsibilities:
-- Designed and implemented 20+ Java-based automated test cases using Selenium WebDriver, TestNG, and Cucumber for web and POS workflows.
-- Executed functional, regression, and smoke testing aligned with SDLC/STLC processes.
-- Refactored automation components using reusable design patterns, reducing maintenance effort by ~30% and improving execution reliability.
-- Validated backend logic by testing API responses, data consistency, and business rules.
-- Contributed to CI-ready automation suites using Git and Maven.
-- Performed defect analysis, root cause investigation, and coordinated with developers.`,
-
-  "skills.txt": `TECHNICAL SKILLS
-================
-
-Programming Languages:
-- Java
-- JavaScript
-
-Test Automation & Tools:
-- Selenium WebDriver
-- TestNG
-- Cucumber
-- Postman
-- JMeter
-
-Web & Databases:
-- Node.js
-- MongoDB
-
-DevOps & Version Control:
-- Git
-- Maven
-- Jenkins`,
-
-  "certifications.txt": `CERTIFICATIONS
-==============
-
-Google Associate Data Practitioner
-- Working knowledge of SQL, BigQuery, and Looker for data querying, transformation, and visualization. Experienced in modern data workflows and analytical best practices.
-
-Java Programming (Learn Quest)
-- Focused on Java features, functions, and building fully functional Java web and mobile applications.
-
-Cloud Computing (NPTEL)
-- Solid understanding of core cloud concepts including cloud architecture, service models (IaaS, PaaS, SaaS), virtualization, and deployment models.`,
-};
+loadPortfolioData();
 
 const computerWindow = document.querySelector(
   "#computer-window .win7-container",
@@ -1089,10 +986,18 @@ function processCommand(cmd) {
           "&nbsp;&nbsp;linkedin&nbsp;- Visit my LinkedIn profile<br>" +
           "&nbsp;&nbsp;leetcode&nbsp;- Visit my LeetCode profile<br>" +
           "&nbsp;&nbsp;books&nbsp;&nbsp;&nbsp;&nbsp;- List books I'm currently reading<br>" +
+          "&nbsp;&nbsp;update&nbsp;&nbsp;&nbsp;- Install critical system updates<br>" + // <-- ADD THIS
           "&nbsp;&nbsp;music&nbsp;&nbsp;&nbsp;&nbsp;- Play/Stop coding music<br>" +
           "&nbsp;&nbsp;pacman&nbsp;&nbsp;&nbsp;- Play ASCII Pacman<br>" +
           "&nbsp;&nbsp;kamui&nbsp;&nbsp;&nbsp;&nbsp;- [RESTRICTED ACCESS]",
       );
+      break;
+    case "update":
+      printToCmd("Initializing Windows Update Service...");
+      printToCmd("Downloading critical patches...");
+      setTimeout(() => {
+        startWindowsUpdate();
+      }, 1000);
       break;
     case "clear":
       cmdHistory.innerHTML = "";
@@ -1393,5 +1298,63 @@ if (btnEndProcess) {
         `Access Denied: You do not have permission to terminate ${selectedProcess}.`,
       );
     }
+  });
+}
+
+// update
+let isUpdating = false;
+
+function startWindowsUpdate() {
+  if (isUpdating) return;
+  isUpdating = true;
+
+  openWindow("update-window");
+  const progressContainer = document.getElementById(
+    "update-progress-container",
+  );
+  const progressBar = document.getElementById("update-progress-bar");
+  const statusText = document.getElementById("update-status-text");
+  const bsodScreen = document.getElementById("bsod-screen");
+  let progress = 0;
+  if (progressContainer) progressContainer.setAttribute("aria-valuenow", "0");
+  if (progressBar) progressBar.style.width = "0%";
+  if (statusText) statusText.innerText = "0% complete";
+  const updateInterval = setInterval(() => {
+    progress += Math.floor(Math.random() * 14) + 2;
+
+    if (progress >= 100) {
+      progress = 100;
+      if (progressContainer)
+        progressContainer.setAttribute("aria-valuenow", "100");
+      if (progressBar) progressBar.style.width = "100%";
+      if (statusText) statusText.innerText = "100% complete - Restarting...";
+      clearInterval(updateInterval);
+      setTimeout(() => {
+        closeWindow("update-window");
+        if (bsodScreen) {
+          bsodScreen.classList.remove("hidden");
+          document.addEventListener(
+            "keydown",
+            () => {
+              window.location.reload();
+            },
+            { once: true },
+          );
+        }
+        isUpdating = false;
+      }, 1500);
+    } else {
+      if (progressContainer)
+        progressContainer.setAttribute("aria-valuenow", progress.toString());
+      if (progressBar) progressBar.style.width = progress + "%";
+      if (statusText) statusText.innerText = progress + "% complete";
+    }
+  }, 800);
+}
+
+const iconUpdate = document.getElementById("icon-update");
+if (iconUpdate) {
+  iconUpdate.addEventListener("dblclick", () => {
+    startWindowsUpdate();
   });
 }
