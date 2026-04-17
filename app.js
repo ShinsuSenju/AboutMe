@@ -1358,3 +1358,27 @@ if (iconUpdate) {
     startWindowsUpdate();
   });
 }
+
+//error
+function showError(message, title = "Windows", iconType = "error") {
+  const errorTitle = document.getElementById("error-title");
+  const errorMessage = document.getElementById("error-message");
+  const errorIcon = document.getElementById("error-icon");
+
+  if (errorTitle) errorTitle.innerText = title;
+  if (errorMessage) errorMessage.innerText = message;
+
+  if (errorIcon) {
+    errorIcon.src = `./images/${iconType}.ico`;
+  }
+
+  let soundFile = "./audio/error.mp3";
+  if (iconType === "warning") soundFile = "./audio/ding.mp3";
+  if (iconType === "info") soundFile = "./audio/error.mp3";
+
+  const audio = new Audio(soundFile);
+  audio.play().catch((e) => console.log("Audio blocked or file missing: ", e));
+  openWindow("error-window");
+  const win = document.getElementById("error-window");
+  if (win) focusWindow(win);
+}

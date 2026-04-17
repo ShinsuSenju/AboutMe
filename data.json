@@ -16,7 +16,11 @@
         "icon": "./images/readme.ico",
         "type": "about"
       },
-      { "name": "skills.txt", "icon": "./images/readme.ico", "type": "about" },
+      {
+        "name": "skills.txt",
+        "icon": "./images/readme.ico",
+        "type": "about"
+      },
       {
         "name": "certifications.txt",
         "icon": "./images/readme.ico",
@@ -42,15 +46,24 @@
         "isLive": false,
         "github": "https://github.com/ShinsuSenju/YelpCamp",
         "url": "https://yelpCampIndia.vercel.app"
+      },
+      {
+        "name": "next_project.bat",
+        "icon": "./images/bat.ico",
+        "type": "project",
+        "exists": false,
+        "isLive": true,
+        "github": "#",
+        "url": ""
       }
     ],
     "G:": []
   },
   "textFilesContent": {
-    "school_edu.txt": "SCHOOL EDUCATION\n================\n\nIntermediate (12th Grade)\nSchool: Army Public School, Shankar Vihar, New Delhi\nSession: 2019-2020\nPercentage: 82%",
+    "school_edu.txt": "SCHOOL EDUCATION\n================\n\nIntermediate (12th Grade)\nSchool: Army Public School, Shankar Vihar, New Delhi\nSession: 2019-2020\nPercentage: 82%\n\nMatriculation (10th Grade)\nSchool: Army Public School, Shankar Vihar, New Delhi\nSession: 2017-2018\nPercentage: 88%",
     "college_edu.txt": "COLLEGE EDUCATION\n=================\n\nDegree: Bachelors in Engineering (Computer Science)\nUniversity: Chandigarh University (CU), Ajitgarh, Punjab\nSession: 2021-2025\nCGPA: 8.24",
-    "professional_exp.txt": "SUMMARY\n=======\nAutomation Test Engineer with hands-on experience in Java-based test automation using Selenium WebDriver, TestNG, and Cucumber.",
-    "skills.txt": "TECHNICAL SKILLS\n================\n\nProgramming Languages:\n- Java\n- JavaScript",
-    "certifications.txt": "CERTIFICATIONS\n==============\n\nGoogle Associate Data Practitioner\n- Working knowledge of SQL, BigQuery, and Looker."
+    "professional_exp.txt": "SUMMARY\n=======\nAutomation Test Engineer with hands-on experience in Java-based test automation using Selenium WebDriver, TestNG, and Cucumber. Strong understanding of SDLC/STLC, functional and regression testing, and API validation. Motivated to contribute to high-quality, reliable software.\n\nPROFESSIONAL EXPERIENCE\n=======================\nCompany: Capgemini Technology Services India Limited (Pune)\nRole: Analyst\nDuration: Jul 2025 - PRESENT\n\nKey Responsibilities:\n- Designed and implemented 20+ Java-based automated test cases using Selenium WebDriver, TestNG, and Cucumber for web and POS workflows.\n- Executed functional, regression, and smoke testing aligned with SDLC/STLC processes.\n- Refactored automation components using reusable design patterns, reducing maintenance effort by ~30% and improving execution reliability.\n- Validated backend logic by testing API responses, data consistency, and business rules.\n- Contributed to CI-ready automation suites using Git and Maven.\n- Performed defect analysis, root cause investigation, and coordinated with developers.",
+    "skills.txt": "TECHNICAL SKILLS\n================\n\nProgramming Languages:\n- Java\n- JavaScript\n\nTest Automation & Tools:\n- Selenium WebDriver\n- TestNG\n- Cucumber\n- Postman\n- JMeter\n\nWeb & Databases:\n- Node.js\n- MongoDB\n\nDevOps & Version Control:\n- Git\n- Maven\n- Jenkins",
+    "certifications.txt": "CERTIFICATIONS\n==============\n\nGoogle Associate Data Practitioner\n- Working knowledge of SQL, BigQuery, and Looker for data querying, transformation, and visualization. Experienced in modern data workflows and analytical best practices.\n\nJava Programming (Learn Quest)\n- Focused on Java features, functions, and building fully functional Java web and mobile applications.\n\nCloud Computing (NPTEL)\n- Solid understanding of core cloud concepts including cloud architecture, service models (IaaS, PaaS, SaaS), virtualization, and deployment models."
   }
 }

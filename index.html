@@ -34,17 +34,8 @@
           />
           <button id="login-btn" class="blue-arrow-btn">➔</button>
         </div>
-        <div style="margin-top: 15px; text-align: center">
-          <span
-            id="guest-login"
-            style="
-              color: #ffffff;
-              font-size: 13px;
-              cursor: pointer;
-              text-decoration: underline;
-              text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-            "
-          >
+        <div class="guest-login-container">
+          <span id="guest-login" class="guest-login-text">
             Log in as Guest (No Password)
           </span>
         </div>
@@ -104,15 +95,12 @@
               <button role="tab" aria-controls="proj2-wip">W.I.P</button>
             </menu>
 
-            <div
-              class="has-scrollbar wizard-tab-content"
-              style="overflow-y: auto"
-            >
+            <div class="has-scrollbar wizard-tab-content scrollable-tab">
               <article role="tabpanel" id="proj2-port">
                 <strong>Windows 7 Simulator</strong><br />
                 <ul>
                   <li>
-                    Built a Windows 7 Simualtor that i'm also using as a
+                    Built a Windows 7 Simulator that i'm also using as a
                     portfolio website
                   </li>
                   <li>
@@ -162,9 +150,7 @@
 
         <div class="window glass active" id="welcome-window">
           <div class="title-bar">
-            <div class="title-bar-text" style="margin-bottom: 3px">
-              Windows 7 Setup
-            </div>
+            <div class="title-bar-text welcome-title">Windows 7 Setup</div>
             <div class="title-bar-controls">
               <button aria-label="Minimize" class="titlebar-min"></button>
               <button aria-label="Maximize" class="titlebar-max"></button>
@@ -194,10 +180,7 @@
 
               <div id="welcome-page-2" class="wizard-page" hidden>
                 <h3>Experience</h3>
-                <div
-                  class="has-scrollbar wizard-scroll-box"
-                  style="overflow-y: auto"
-                >
+                <div class="has-scrollbar wizard-scroll-box scrollable-tab">
                   <fieldset>
                     <legend>Experience</legend>
                     <strong>Capgemini <em>(July 2025 - Present)</em></strong>
@@ -221,8 +204,7 @@
               <div id="welcome-page-3" class="wizard-page" hidden>
                 <h3>Certifications</h3>
                 <div
-                  class="has-scrollbar wizard-scroll-box cert-scroll"
-                  style="overflow-y: auto"
+                  class="has-scrollbar wizard-scroll-box cert-scroll scrollable-tab"
                 >
                   <fieldset>
                     <legend>Certifications</legend>
@@ -247,10 +229,7 @@
 
               <div id="welcome-page-4" class="wizard-page" hidden>
                 <h3>Technical Skills</h3>
-                <div
-                  class="has-scrollbar wizard-scroll-box"
-                  style="overflow-y: auto"
-                >
+                <div class="has-scrollbar wizard-scroll-box scrollable-tab">
                   <fieldset>
                     <legend>Languages & Web</legend>
                     Java, JavaScript, Node.js, HTML, CSS
@@ -268,7 +247,6 @@
 
               <div id="welcome-page-5" class="wizard-page projects-page" hidden>
                 <h3>Featured Projects</h3>
-
                 <menu role="tablist" class="wizard-tabs">
                   <button
                     role="tab"
@@ -282,16 +260,12 @@
                   </button>
                   <button role="tab" aria-controls="proj-wip">W.I.P</button>
                 </menu>
-
-                <div
-                  class="has-scrollbar wizard-tab-content"
-                  style="overflow-y: auto"
-                >
+                <div class="has-scrollbar wizard-tab-content scrollable-tab">
                   <article role="tabpanel" id="proj-port">
                     <strong>Windows 7 Simulator</strong><br />
                     <ul>
                       <li>
-                        Built a Windows 7 Simualtor that i'm also using as a
+                        Built a Windows 7 Simulator that i'm also using as a
                         portfolio website
                       </li>
                       <li>
@@ -301,7 +275,6 @@
                       <li>Used only HTML, CSS and Vanilla JavaScript</li>
                     </ul>
                   </article>
-
                   <article role="tabpanel" id="proj-yelp" hidden>
                     <strong>Full Stack & Testing</strong><br />
                     <ul>
@@ -325,7 +298,6 @@
                       </li>
                     </ul>
                   </article>
-
                   <article role="tabpanel" id="proj-wip" hidden>
                     <strong>Work In Progress</strong><br />
                     <ul>
@@ -350,8 +322,7 @@
                   <p><strong>Quick Tips:</strong></p>
                   <ul>
                     <li>
-                      Open <em>My Computer</em> to view my project repositories
-                      .
+                      Open <em>My Computer</em> to view my project repositories.
                     </li>
                     <li>
                       Click the Start Button and use Internet explorer to browse
@@ -359,8 +330,7 @@
                     </li>
                     <li>
                       Don't try something like deleting recycle bin or stopping
-                      system32 using task manager or update windows using
-                      desktop icon (W.I.P).
+                      system32 using task manager.
                     </li>
                   </ul>
                   <p class="finish-prompt">
@@ -373,14 +343,14 @@
               <div class="wizard-footer">
                 <button id="wiz-back" disabled>&lt; Back</button>
                 <button id="wiz-next">Next &gt;</button>
-                <button id="wiz-finish" style="display: none">Finish</button>
+                <button id="wiz-finish">Finish</button>
               </div>
             </div>
           </div>
         </div>
 
         <div class="window glass active window-closed" id="computer-window">
-          <div class="title-bar" style="margin-bottom: 0; padding-bottom: 5px">
+          <div class="title-bar explorer-title-bar">
             <div class="title-bar-text">Computer</div>
             <div class="title-bar-controls">
               <button aria-label="Minimize" class="titlebar-min"></button>
@@ -395,11 +365,7 @@
               <div class="win7-btn round">➜</div>
             </div>
             <div class="win7-addr">
-              <img
-                src="./images/computer-icon.ico"
-                width="16"
-                style="margin-right: 5px"
-              />
+              <img src="./images/computer-icon.ico" class="explorer-icon-sm" />
               <label>Computer</label>
             </div>
             <div class="win7-search">
@@ -412,8 +378,10 @@
               <div
                 class="toolbar-item"
                 onclick="
-                  alert(
-                    'Error: Cannot organize Anurag\'s life right now. Try again after coffee.',
+                  showError(
+                    'Cannot organize Anurag\'s life right now. Try again after coffee.',
+                    'Explorer',
+                    'warning',
                   )
                 "
               >
@@ -424,20 +392,36 @@
               </div>
               <div
                 class="toolbar-item"
-                onclick="alert('Uninstalling myself...\nSuccess! :\(')"
+                onclick="
+                  showError(
+                    'Uninstalling myself...\nSuccess! :(',
+                    'Programs and Features',
+                    'info',
+                  )
+                "
               >
                 Uninstall or change a program
               </div>
               <div
                 class="toolbar-item"
-                onclick="alert('Mapping network drive to: NASA...')"
+                onclick="
+                  showError(
+                    'Mapping network drive to: NASA...',
+                    'Network',
+                    'info',
+                  )
+                "
               >
                 Map network drive
               </div>
               <div
                 class="toolbar-item"
                 onclick="
-                  alert('Opening Control Panel... Nope you can\'t do that ')
+                  showError(
+                    'Opening Control Panel... Nope you can\'t do that',
+                    'Control Panel',
+                    'error',
+                  )
                 "
               >
                 Open Control Panel
@@ -452,19 +436,30 @@
                     <li>
                       <img src="./images/computer-icon.ico" /> My Computer
                     </li>
-                    <li onclick="alert('Go Download Something first -_- .')">
+                    <li
+                      onclick="
+                        showError(
+                          'Go Download Something first -_-.',
+                          'Downloads',
+                          'info',
+                        )
+                      "
+                    >
                       <img src="./images/downloads.ico" /> Downloads
                     </li>
                     <li
                       onclick="
-                        alert('i have not been to a lot of places lately :( ')
+                        showError(
+                          'I have not been to a lot of places lately :(',
+                          'Recent Places',
+                          'info',
+                        )
                       "
                     >
                       <img src="./images/recent.ico" /> Recent Places
                     </li>
                   </ul>
                 </div>
-
                 <div class="sidebar-section">
                   <div class="sidebar-header">📚 Libraries</div>
                   <ul>
@@ -473,12 +468,15 @@
                     <li><img src="./images/video.ico" /> Videos</li>
                   </ul>
                 </div>
-
                 <div class="sidebar-section">
                   <div class="sidebar-header active">
-                    <img src="./images/computer-icon.ico" width="16" /> Computer
+                    <img
+                      src="./images/computer-icon.ico"
+                      class="explorer-icon-sm"
+                    />
+                    Computer
                   </div>
-                  <ul style="padding-left: 20px">
+                  <ul class="sidebar-sublist">
                     <li><img src="./images/hdd2.ico" />Brain (C:)</li>
                     <li><img src="./images/hdd1.ico" />Projects (D:)</li>
                     <li><img src="./images/hdd1.ico" />Wallet (G:)</li>
@@ -486,7 +484,7 @@
                 </div>
               </div>
 
-              <div class="win7-container" style="flex: 1">
+              <div class="win7-container explorer-container">
                 <div class="win7-headline">Hard Disk Drives (3)</div>
                 <div class="win7-devices">
                   <div class="win7-device disk-os">
@@ -505,7 +503,7 @@
                   </div>
                 </div>
 
-                <div class="win7-headline" style="margin-top: 20px">
+                <div class="win7-headline headline-spaced">
                   Devices with Removable Storage (2)
                 </div>
                 <div class="win7-devices">
@@ -522,11 +520,7 @@
             </div>
 
             <div class="explorer-footer">
-              <img
-                src="./images/computer-icon.ico"
-                width="32"
-                style="margin-right: 15px"
-              />
+              <img src="./images/computer-icon.ico" class="explorer-icon-md" />
               <div class="footer-details">
                 <strong>Guest</strong><br />
                 Processor: Intel(R) Core(TM)<br />
@@ -537,7 +531,7 @@
         </div>
 
         <div class="window glass active window-closed" id="recycle-window">
-          <div class="title-bar" style="margin-bottom: 0; padding-bottom: 5px">
+          <div class="title-bar explorer-title-bar">
             <div class="title-bar-text">Recycle Bin</div>
             <div class="title-bar-controls">
               <button aria-label="Minimize" class="titlebar-min"></button>
@@ -552,11 +546,7 @@
               <div class="win7-btn round">➜</div>
             </div>
             <div class="win7-addr">
-              <img
-                src="./images/recycle-icon.ico"
-                width="16"
-                style="margin-right: 5px"
-              />
+              <img src="./images/recycle-icon.ico" class="explorer-icon-sm" />
               <label>Recycle Bin</label>
             </div>
             <div class="win7-search">
@@ -567,8 +557,7 @@
           <div class="window-body explorer-body">
             <div class="win7-toolbar">
               <div
-                class="toolbar-item"
-                style="color: #c00; font-weight: bold"
+                class="toolbar-item toolbar-danger"
                 onclick="emptyRecycleBin()"
               >
                 Empty the Recycle Bin
@@ -576,7 +565,11 @@
               <div
                 class="toolbar-item"
                 onclick="
-                  alert('Sorry! Some things are better left in the past.')
+                  showError(
+                    'Sorry! Some things are better left in the past.',
+                    'Recycle Bin',
+                    'warning',
+                  )
                 "
               >
                 Restore all items
@@ -591,67 +584,69 @@
                     <li onclick="navigateExplorer(event, 'computer')">
                       <img src="./images/computer-icon.ico" /> Computer
                     </li>
-                    <li onclick="alert('Go Download Something first -_- .')">
+                    <li
+                      onclick="
+                        showError(
+                          'Go Download Something first -_-.',
+                          'Downloads',
+                          'info',
+                        )
+                      "
+                    >
                       <img src="./images/downloads.ico" /> Downloads
                     </li>
                   </ul>
                 </div>
                 <div class="sidebar-section">
                   <div class="sidebar-header active">
-                    <img src="./images/recycle-icon.ico" width="16" /> Recycle
-                    Bin
+                    <img
+                      src="./images/recycle-icon.ico"
+                      class="explorer-icon-sm"
+                    />
+                    Recycle Bin
                   </div>
                 </div>
               </div>
 
-              <div
-                class="win7-container"
-                style="flex: 1; padding: 15px; overflow-y: auto"
-              >
+              <div class="win7-container recycle-contents-container">
                 <div class="win7-file-grid" id="recycle-contents">
                   <div
                     class="win7-file"
                     onclick="
-                      alert(
-                        'I started with a Windows XP theme first, but actual resources were so hard to find that I had to scrap the idea and move to Windows 7. :\)',
+                      showError(
+                        'I started with a Windows XP theme first, but actual resources were so hard to find that I had to scrap the idea and move to Windows 7. :)',
+                        'History',
+                        'info',
                       )
                     "
                   >
                     <img src="./images/zip.ico" />
                     <span>windows_xp.zip</span>
                   </div>
-
                   <div
                     class="win7-file"
                     onclick="
-                      alert('Error: Hey!, That feature doesn\'t work yet')
+                      showError(
+                        'Hey! That feature doesn\'t work yet.',
+                        'System',
+                        'error',
+                      )
                     "
                   >
                     <img src="./images/star.ico" />
                     <span>make_me_rich.exe</span>
                   </div>
-
                   <div
                     class="win7-file"
-                    onclick="alert('Contains 0 hours of sleep.')"
+                    onclick="
+                      showError('Contains 0 hours of sleep.', 'Notepad', 'info')
+                    "
                   >
                     <img src="./images/readme.ico" />
                     <span>sleep_schedule.txt</span>
                   </div>
                 </div>
-
-                <div
-                  id="recycle-empty-msg"
-                  style="
-                    display: none;
-                    color: #999;
-                    text-align: center;
-                    margin-top: 50px;
-                    font-size: 12px;
-                  "
-                >
-                  This folder is empty.
-                </div>
+                <div id="recycle-empty-msg">This folder is empty.</div>
               </div>
             </div>
 
@@ -664,18 +659,7 @@
           </div>
         </div>
 
-        <div
-          class="window window-closed"
-          id="cmd-window"
-          style="
-            width: 650px;
-            height: 400px;
-            top: 20%;
-            left: 25%;
-            display: flex;
-            flex-direction: column;
-          "
-        >
+        <div class="window window-closed" id="cmd-window">
           <div class="title-bar">
             <div class="title-bar-text">
               <img
@@ -692,79 +676,27 @@
               <button aria-label="Close" class="titlebar-close"></button>
             </div>
           </div>
-          <div
-            class="window-body cmd-body"
-            style="
-              flex: 1;
-              margin: 0;
-              background-color: #000;
-              padding: 5px;
-              overflow-y: auto;
-            "
-          >
-            <div
-              class="window-body cmd-body"
-              style="
-                flex: 1;
-                margin: 0;
-                background-color: #000;
-                padding: 5px;
-                overflow-y: auto;
-                font-family: &quot;Consolas&quot;, monospace;
-                font-size: 13px;
-                color: #ccc;
-                cursor: text;
-              "
-            >
-              <div
-                id="cmd-content"
-                style="display: flex; flex-direction: column; min-height: 100%"
-              >
-                <div id="cmd-history">
-                  Microsoft Windows [Version 6.1.7601]<br />
-                  Copyright (c) 2009 Microsoft Corporation. All rights
-                  reserved.<br /><br />
-                </div>
-                <div
-                  id="cmd-input-line"
-                  style="display: flex; align-items: center; margin-top: 5px"
-                >
-                  <span id="cmd-prompt" style="margin-right: 8px"
-                    >C:\Users\Anurag&gt;</span
-                  >
-                  <input
-                    type="text"
-                    id="cmd-input"
-                    autocomplete="off"
-                    spellcheck="false"
-                    style="
-                      flex: 1;
-                      background: transparent;
-                      border: none;
-                      color: #fff;
-                      font-family: &quot;Consolas&quot;, monospace;
-                      font-size: 13px;
-                      outline: none;
-                    "
-                  />
-                </div>
+          <div class="window-body cmd-body">
+            <div id="cmd-content">
+              <div id="cmd-history">
+                Microsoft Windows [Version 6.1.7601]<br />
+                Copyright (c) 2009 Microsoft Corporation. All rights
+                reserved.<br /><br />
+              </div>
+              <div id="cmd-input-line">
+                <span id="cmd-prompt">C:\Users\Anurag&gt;</span>
+                <input
+                  type="text"
+                  id="cmd-input"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
               </div>
             </div>
           </div>
         </div>
 
-        <div
-          class="window window-closed"
-          id="notepad-window"
-          style="
-            width: 500px;
-            height: 450px;
-            top: 15%;
-            left: 30%;
-            display: flex;
-            flex-direction: column;
-          "
-        >
+        <div class="window window-closed" id="notepad-window">
           <div class="title-bar">
             <div class="title-bar-text">
               <img
@@ -780,44 +712,20 @@
               <button aria-label="Close" class="titlebar-close"></button>
             </div>
           </div>
-
           <div class="notepad-menu">
             <span>File</span><span>Edit</span><span>Format</span
             ><span>View</span><span>Help</span>
           </div>
-
-          <div
-            class="window-body notepad-body"
-            style="flex: 1; margin: 0; padding: 0; display: flex"
-          >
+          <div class="window-body notepad-body">
             <textarea
               id="notepad-text-area"
               class="has-scrollbar"
               readonly
-              style="
-                flex: 1;
-                border: none;
-                resize: none;
-                outline: none;
-                padding: 5px;
-                overflow-y: auto;
-              "
             ></textarea>
           </div>
         </div>
 
-        <div
-          class="window window-closed"
-          id="sysprop-window"
-          style="
-            width: 780px;
-            height: 550px;
-            top: 10%;
-            left: 15%;
-            display: flex;
-            flex-direction: column;
-          "
-        >
+        <div class="window window-closed" id="sysprop-window">
           <div class="title-bar">
             <div class="title-bar-text">
               <img
@@ -833,257 +741,79 @@
               <button aria-label="Close" class="titlebar-close"></button>
             </div>
           </div>
-
-          <div
-            class="window-body sysprop-body"
-            style="
-              flex: 1;
-              margin: 0;
-              padding: 0;
-              display: flex;
-              flex-direction: row;
-              background-color: #f0f4f9;
-            "
-          >
-            <div
-              class="sysprop-sidebar"
-              style="
-                width: 200px;
-                background: linear-gradient(to bottom, #f0f4fa, #dce6f4);
-                padding: 20px 15px;
-                border-right: 1px solid #c2d6eb;
-              "
-            >
-              <div
-                class="sysprop-link"
-                style="
-                  color: #003399;
-                  font-size: 12px;
-                  margin-bottom: 8px;
-                  cursor: pointer;
-                "
-              >
-                <img src="./images/search.svg" width="16" /> Control Panel Home
+          <div class="window-body sysprop-body">
+            <div class="sysprop-sidebar">
+              <div class="sysprop-link">
+                <img src="./images/control.ico" class="explorer-icon-sm" />
+                Control Panel Home
               </div>
-              <div
-                class="sysprop-link"
-                style="
-                  color: #003399;
-                  font-size: 12px;
-                  margin-bottom: 8px;
-                  cursor: pointer;
-                "
-              >
-                <img src="./images/search.svg" width="16" /> Device Manager
+              <div class="sysprop-link">
+                <img src="./images/device.ico" class="explorer-icon-sm" />
+                Device Manager
               </div>
-              <div
-                class="sysprop-link"
-                style="
-                  color: #003399;
-                  font-size: 12px;
-                  margin-bottom: 8px;
-                  cursor: pointer;
-                "
-              >
-                <img src="./images/search.svg" width="16" /> Remote settings
+              <div class="sysprop-link">
+                <img src="./images/network.ico" class="explorer-icon-sm" />
+                Remote settings
               </div>
-              <div
-                class="sysprop-link"
-                style="
-                  color: #003399;
-                  font-size: 12px;
-                  margin-bottom: 8px;
-                  cursor: pointer;
-                "
-              >
-                <img src="./images/search.svg" width="16" /> System protection
+              <div class="sysprop-link">
+                <img src="./images/device.ico" class="explorer-icon-sm" />
+                System protection
               </div>
-              <div
-                class="sysprop-link"
-                style="
-                  color: #003399;
-                  font-size: 12px;
-                  margin-bottom: 8px;
-                  cursor: pointer;
-                "
-              >
-                <img src="./images/search.svg" width="16" /> Advanced system
-                settings
+              <div class="sysprop-link">
+                <img src="./images/device.ico" class="explorer-icon-sm" />
+                Advanced system settings
               </div>
             </div>
-
-            <div
-              class="sysprop-content"
-              style="
-                flex: 1;
-                background: #fff;
-                padding: 20px 30px;
-                overflow-y: auto;
-              "
-            >
-              <div
-                class="sysprop-header"
-                style="color: #003399; font-size: 15px; margin-bottom: 20px"
-              >
+            <div class="sysprop-content">
+              <div class="sysprop-header">
                 View basic information about your computer
               </div>
 
-              <div
-                class="sysprop-section"
-                style="
-                  border-bottom: 1px solid #d9d9d9;
-                  padding-bottom: 15px;
-                  margin-bottom: 15px;
-                  font-size: 12px;
-                "
-              >
-                <h3
-                  class="sysprop-h3"
-                  style="
-                    color: #003399;
-                    font-size: 13px;
-                    font-weight: 600;
-                    margin: 0 0 10px 0;
-                  "
-                >
-                  Windows edition
-                </h3>
+              <div class="sysprop-section">
+                <h3 class="sysprop-h3">Windows edition</h3>
                 <p>
-                  Windows 7 Professional Developer Edition<br />
-                  Copyright © 2009 Microsoft Corporation. All rights reserved.
+                  Windows 7 Professional Developer Edition<br />Copyright © 2009
+                  Microsoft Corporation. All rights reserved.
                 </p>
-                <p style="margin-top: 5px">Service Pack 1</p>
+                <p class="headline-spaced">Service Pack 1</p>
               </div>
 
-              <div
-                class="sysprop-section"
-                style="
-                  border-bottom: 1px solid #d9d9d9;
-                  padding-bottom: 15px;
-                  margin-bottom: 15px;
-                  font-size: 12px;
-                "
-              >
-                <h3
-                  class="sysprop-h3"
-                  style="
-                    color: #003399;
-                    font-size: 13px;
-                    font-weight: 600;
-                    margin: 0 0 10px 0;
-                  "
-                >
-                  System
-                </h3>
-                <div
-                  class="sysprop-grid"
-                  style="
-                    display: grid;
-                    grid-template-columns: 180px 1fr;
-                    row-gap: 6px;
-                  "
-                >
-                  <div class="label" style="color: #555">Rating:</div>
-                  <div
-                    class="value rating-box"
-                    style="display: flex; align-items: center; gap: 10px"
-                  >
-                    <div
-                      class="wei-score"
-                      style="
-                        background-color: #2b70d4;
-                        color: white;
-                        font-size: 16px;
-                        font-weight: bold;
-                        padding: 2px 10px;
-                        border: 1px solid #003399;
-                        border-radius: 2px;
-                      "
-                    >
-                      7.9
-                    </div>
-                    <span
-                      style="
-                        color: #003399;
-                        cursor: pointer;
-                        text-decoration: underline;
-                      "
-                      >Windows Experience Index</span
-                    >
+              <div class="sysprop-section">
+                <h3 class="sysprop-h3">System</h3>
+                <div class="sysprop-grid">
+                  <div class="sysprop-label">Rating:</div>
+                  <div class="rating-box">
+                    <div class="wei-score">7.9</div>
+                    <span class="wei-link">Windows Experience Index</span>
                   </div>
-
-                  <div class="label" style="color: #555">Processor:</div>
+                  <div class="sysprop-label">Processor:</div>
                   <div class="value">Intel-Core i9 @ 3.50GHz</div>
-
-                  <div class="label" style="color: #555">
-                    Installed memory (RAM):
-                  </div>
+                  <div class="sysprop-label">Installed memory (RAM):</div>
                   <div class="value">64.0 GB</div>
-
-                  <div class="label" style="color: #555">System type:</div>
+                  <div class="sysprop-label">System type:</div>
                   <div class="value">64-bit</div>
                 </div>
               </div>
 
-              <div
-                class="sysprop-section"
-                style="
-                  border-bottom: 1px solid #d9d9d9;
-                  padding-bottom: 15px;
-                  margin-bottom: 15px;
-                  font-size: 12px;
-                "
-              >
-                <h3
-                  class="sysprop-h3"
-                  style="
-                    color: #003399;
-                    font-size: 13px;
-                    font-weight: 600;
-                    margin: 0 0 10px 0;
-                  "
-                >
+              <div class="sysprop-section">
+                <h3 class="sysprop-h3">
                   Computer name, domain, and workgroup settings
                 </h3>
-                <div
-                  class="sysprop-grid"
-                  style="
-                    display: grid;
-                    grid-template-columns: 180px 1fr;
-                    row-gap: 6px;
-                  "
-                >
-                  <div class="label" style="color: #555">Computer name:</div>
+                <div class="sysprop-grid">
+                  <div class="sysprop-label">Computer name:</div>
                   <div class="value">ANURAG-PC</div>
-                  <div class="label" style="color: #555">
-                    Full computer name:
-                  </div>
+                  <div class="sysprop-label">Full computer name:</div>
                   <div class="value">ANURAG-PC.com</div>
-                  <div class="label" style="color: #555">
-                    Computer description:
-                  </div>
+                  <div class="sysprop-label">Computer description:</div>
                   <div class="value">Reliable Software Engineer</div>
                 </div>
               </div>
 
-              <div
-                class="sysprop-section"
-                style="border-bottom: none; font-size: 12px"
-              >
-                <h3
-                  class="sysprop-h3"
-                  style="
-                    color: #003399;
-                    font-size: 13px;
-                    font-weight: 600;
-                    margin: 0 0 10px 0;
-                  "
-                >
-                  Windows activation
-                </h3>
+              <div class="sysprop-section no-border">
+                <h3 class="sysprop-h3">Windows activation</h3>
                 <p>
-                  Experience Activated. Ready to Hire.<br />
-                  <span style="color: #003399; cursor: pointer"
+                  Experience Activated. Ready to Hire.<br /><span
+                    class="wei-link"
                     >Read the Microsoft Software License Terms</span
                   >
                 </p>
@@ -1236,7 +966,6 @@
           </div>
           <div class="window-body update-body">
             <h3 class="update-title">Downloading Updates...</h3>
-
             <div
               role="progressbar"
               class="animate"
@@ -1244,49 +973,79 @@
               aria-valuemax="100"
               aria-valuenow="0"
               id="update-progress-container"
-              style="margin-bottom: 15px"
             >
               <div id="update-progress-bar" style="width: 0%"></div>
             </div>
-
             <p id="update-status-text" class="update-status">0% complete</p>
+          </div>
+        </div>
+
+        <div class="window window-closed" id="error-window">
+          <div class="title-bar">
+            <div class="title-bar-text" id="error-title">Windows</div>
+            <div class="title-bar-controls">
+              <button
+                aria-label="Close"
+                class="titlebar-close"
+                onclick="closeWindow('error-window')"
+              ></button>
+            </div>
+          </div>
+          <div class="window-body error-dialog-body">
+            <div class="error-dialog-content">
+              <img src="./images/error.ico" alt="Icon" id="error-icon" />
+              <p id="error-message"></p>
+            </div>
+            <div class="error-dialog-footer">
+              <button
+                class="error-ok-btn"
+                onclick="closeWindow('error-window')"
+              >
+                OK
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      <ul id="context-menu" role="menu" class="can-hover" style="display: none">
+      <ul id="context-menu" role="menu" class="can-hover context-menu-base">
         <li role="menuitem" tabindex="0" aria-haspopup="true">
           View
-          <ul role="menu" style="width: 150px">
+          <ul role="menu" class="menu-w150">
             <li role="menuitem">
-              <input type="radio" name="icon-size" id="example15" />
-              <label for="example15">Large icons</label>
+              <input type="radio" name="icon-size" id="example15" /><label
+                for="example15"
+                >Large icons</label
+              >
             </li>
             <li role="menuitem">
-              <input type="radio" name="icon-size" id="example16" checked="" />
-              <label for="example16">Medium icons</label>
+              <input
+                type="radio"
+                name="icon-size"
+                id="example16"
+                checked=""
+              /><label for="example16">Medium icons</label>
             </li>
             <li role="menuitem" class="has-divider">
-              <input type="radio" name="icon-size" id="example17" />
-              <label for="example17">Small icons</label>
+              <input type="radio" name="icon-size" id="example17" /><label
+                for="example17"
+                >Small icons</label
+              >
             </li>
           </ul>
         </li>
-
         <li role="menuitem" tabindex="0" aria-haspopup="true">
           Sort by
-          <ul role="menu" style="width: 120px">
+          <ul role="menu" class="menu-w120">
             <li role="menuitem" id="sort-name"><a href="#menu">Name</a></li>
             <li role="menuitem" id="sort-type">
               <a href="#menu">Item type</a>
             </li>
           </ul>
         </li>
-
         <li role="menuitem" class="has-divider" id="menu-refresh">
           <a href="#menu">Refresh</a>
         </li>
-
         <li role="menuitem" id="menu-linux">
           <a href="#menu">Install Linux</a>
         </li>
@@ -1298,23 +1057,25 @@
         >
           <a href="#menu">Hack Google</a>
         </li>
-
         <li role="menuitem" id="menu-source">
-          <img src="./images/cmd.png" width="20px" />
-          <a href="#menu">View Source Code</a>
+          <img src="./images/cmd.png" width="20px" /><a href="#menu"
+            >View Source Code</a
+          >
         </li>
         <li role="menuitem" id="menu-projects">
-          <img src="./images/folder-invoices--v1.png" />
-          <a href="#menu">My Projects</a>
+          <img src="./images/folder-invoices--v1.png" /><a href="#menu"
+            >My Projects</a
+          >
         </li>
         <li role="menuitem" id="menu-personalize">
-          <img src="./images/remote-desktop.png" />
-          <a href="#menu">Personalize</a>
+          <img src="./images/remote-desktop.png" /><a href="#menu"
+            >Personalize</a
+          >
         </li>
       </ul>
 
-      <div id="icon-context-menu" class="context-menu">
-        <ul role="menu" class="can-hover" style="width: 200px">
+      <div id="icon-context-menu" class="context-menu context-menu-base">
+        <ul role="menu" class="can-hover menu-w200">
           <li id="menu-open" role="menuitem"><a href="#menu">Open</a></li>
           <li
             role="menuitem"
@@ -1329,18 +1090,15 @@
               </li>
             </ul>
           </li>
-          <li role="menuitem" aria-disabled="true">
-            <a href="#menu">Cut</a>
-          </li>
-          <li role="menuitem" aria-disabled="true">
-            <a href="#menu">Copy</a>
-          </li>
+          <li role="menuitem" aria-disabled="true"><a href="#menu">Cut</a></li>
+          <li role="menuitem" aria-disabled="true"><a href="#menu">Copy</a></li>
           <li role="menuitem" id="menu-delete" class="has-divider">
             <a href="#menu">Delete</a>
           </li>
           <li role="menuitem" aria-disabled="true">
-            <img src="./images/computer-icon.ico" width="25px" />
-            <a href="#menu">Properties</a>
+            <img src="./images/computer-icon.ico" width="25px" /><a href="#menu"
+              >Properties</a
+            >
           </li>
         </ul>
       </div>
@@ -1365,94 +1123,65 @@
           <div id="start-button"></div>
           <div id="app-group">
             <div
-              class="aero-taskbar-icon"
+              class="aero-taskbar-icon hidden-taskbar-icon"
               id="taskbar-projects"
-              style="display: none"
             >
               <img src="./images/myprojects.ico" alt="Projects" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
-
             <div
-              class="aero-taskbar-icon"
+              class="aero-taskbar-icon hidden-taskbar-icon"
               id="taskbar-update"
-              style="display: none"
             >
               <img src="./images/windows_update_icon.avif" alt="Update" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
-
             <div
-              class="aero-taskbar-icon"
+              class="aero-taskbar-icon hidden-taskbar-icon"
               id="taskbar-taskmgr"
-              style="display: none"
             >
               <img src="./images/taskmgr.ico" alt="Task Manager" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
-
             <div
-              class="aero-taskbar-icon"
+              class="aero-taskbar-icon hidden-taskbar-icon"
               id="taskbar-computer"
-              style="display: none"
             >
               <img src="./images/computer-icon.ico" alt="Computer" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
-
             <div
-              class="aero-taskbar-icon"
+              class="aero-taskbar-icon hidden-taskbar-icon"
               id="taskbar-recycle"
-              style="display: none"
             >
               <img src="./images/recycle-icon.ico" alt="Recycle Bin" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
-
-            <div
-              class="aero-taskbar-icon"
-              id="taskbar-cmd"
-              style="display: none"
-            >
+            <div class="aero-taskbar-icon hidden-taskbar-icon" id="taskbar-cmd">
               <img src="./images/cmd.png" alt="cmd" />
-              <div class="aero-peek">
-                <div class="peek-thumb"></div>
-              </div>
+              <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
-
             <div
-              class="aero-taskbar-icon"
+              class="aero-taskbar-icon hidden-taskbar-icon"
               id="taskbar-notepad"
-              style="display: none"
             >
               <img src="./images/notepad.png" alt="notepad" />
-              <div class="aero-peek">
-                <div class="peek-thumb"></div>
-              </div>
+              <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
-
             <div
-              class="aero-taskbar-icon"
+              class="aero-taskbar-icon hidden-taskbar-icon"
               id="taskbar-usage"
-              style="display: none"
             >
               <img src="./images/readme.ico" alt="Notepad" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
-
-            <div
-              class="aero-taskbar-icon app-active"
-              id="taskbar-welcome"
-              style="display: flex"
-            >
+            <div class="aero-taskbar-icon app-active" id="taskbar-welcome">
               <img src="./images/wizard.ico" alt="Welcome Setup" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
             </div>
-
             <div
-              class="aero-taskbar-icon"
+              class="aero-taskbar-icon hidden-taskbar-icon"
               id="taskbar-sysprop"
-              style="display: none"
             >
               <img src="./images/computer-icon.ico" alt="system" />
               <div class="aero-peek"><div class="peek-thumb"></div></div>
@@ -1507,7 +1236,6 @@
               <span>Task Manager</span>
             </div>
           </div>
-
           <div class="search-box">
             <input type="text" placeholder="Search programs and files" />
           </div>
@@ -1517,7 +1245,6 @@
           <div class="start-avatar" data-app="profile">
             <img src="./images/user-icon.ico" alt="Profile" />
           </div>
-
           <div class="system-links">
             <div class="link-item" data-app="projects">Projects</div>
             <div class="link-item external" data-url="assets/resume.pdf">
