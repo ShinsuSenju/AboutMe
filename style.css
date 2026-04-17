@@ -1676,3 +1676,163 @@ button:focus {
     filter: blur(15px);
   }
 }
+
+/* taskmgr */
+#taskmgr-window {
+  width: 600px;
+  height: 650px;
+  top: 10%;
+  left: 20%;
+}
+
+.title-bar-text {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.taskmgr-body {
+  margin: 0;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 35px);
+  background: #f0f0f0;
+  box-sizing: border-box;
+}
+
+.taskmgr-tabs {
+  margin-bottom: 8px;
+}
+
+.taskmgr-content {
+  flex: 1;
+  border: 1px solid #8e8f8f;
+  background: #fff;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+
+.taskmgr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: left;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  white-space: nowrap;
+}
+
+.taskmgr-table thead {
+  background: #f0f0f0;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.taskmgr-table th {
+  padding: 4px 6px;
+  border-right: 1px solid #d9d9d9;
+  font-weight: normal;
+}
+
+.taskmgr-table td {
+  padding: 2px 6px;
+}
+
+.tm-process {
+  cursor: pointer;
+}
+
+.tm-process.selected {
+  background-color: #0078d7;
+  color: #fff;
+}
+
+.taskmgr-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 12px;
+}
+
+.taskmgr-controls button {
+  padding: 4px 15px;
+}
+
+.taskmgr-statusbar {
+  display: flex;
+  border-top: 1px solid #ccc;
+  padding-top: 4px;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 12px;
+}
+
+.taskmgr-statusbar span {
+  flex: 1;
+  border-right: 1px solid #ccc;
+  padding-left: 5px;
+}
+
+.taskmgr-statusbar span:last-child {
+  border-right: none;
+}
+
+.bsod-modern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0078d7;
+  color: #ffffff;
+  font-family: "Segoe UI", sans-serif;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+}
+
+.bsod-content {
+  width: 80%;
+  max-width: 1000px;
+}
+
+.bsod-face {
+  font-size: 120px;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+}
+
+.bsod-text {
+  font-size: 28px;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.bsod-percent {
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.bsod-footer {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.bsod-qr {
+  width: 100px;
+  height: 100px;
+  background: #fff;
+}
+
+.bsod-info {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.bsod-stopcode {
+  margin-top: 15px;
+  font-size: 14px;
+}

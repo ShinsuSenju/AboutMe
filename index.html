@@ -351,11 +351,11 @@
                   <ul>
                     <li>
                       Open <em>My Computer</em> to view my project repositories
-                      (W.I.P).
+                      .
                     </li>
                     <li>
-                      Click the Start Button to meet <strong>Rover</strong>. He
-                      can help you with searching about me in depth (W.I.P).
+                      Click the Start Button and use Internet explorer to browse
+                      Internet Or Open a CMD Window
                     </li>
                     <li>
                       Don't try something like deleting recycle bin or stopping
@@ -1091,6 +1091,133 @@
             </div>
           </div>
         </div>
+
+        <div id="bsod-screen" class="hidden bsod-modern">
+          <div class="bsod-content">
+            <h1 class="bsod-face">:(</h1>
+            <p class="bsod-text">
+              Your PC ran into a problem and needs to restart. We're just
+              collecting some error info, and then we'll restart for you.
+            </p>
+            <p class="bsod-percent">20% complete</p>
+            <div class="bsod-footer">
+              <div class="bsod-qr-placeholder">
+                <img
+                  src="./images/qr.png"
+                  alt="QR Code"
+                  class="bsod-qr"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="bsod-info">
+                <p>
+                  For more information about this issue and possible fixes,
+                  visit https://www.windows.com/stopcode
+                </p>
+                <p class="bsod-stopcode">
+                  If you call a support person, give them this info:<br />Stop
+                  code: CRITICAL_PROCESS_DIED
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="window window-closed" id="taskmgr-window">
+          <div class="title-bar">
+            <div class="title-bar-text">
+              <img
+                src="./images/TaskManager.ico"
+                width="15px"
+                alt="Task Manager"
+              />
+              Windows Task Manager
+            </div>
+            <div class="title-bar-controls">
+              <button aria-label="Minimize" class="titlebar-min"></button>
+              <button aria-label="Maximize" class="titlebar-max"></button>
+              <button aria-label="Close" class="titlebar-close"></button>
+            </div>
+          </div>
+          <div class="window-body taskmgr-body">
+            <div class="wizard-tabs taskmgr-tabs">
+              <button role="tab" aria-selected="false">Applications</button>
+              <button role="tab" aria-selected="true">Processes</button>
+              <button role="tab" aria-selected="false">Services</button>
+              <button role="tab" aria-selected="false">Performance</button>
+              <button role="tab" aria-selected="false">Networking</button>
+              <button role="tab" aria-selected="false">Users</button>
+            </div>
+            <div class="taskmgr-content">
+              <table class="taskmgr-table">
+                <thead>
+                  <tr>
+                    <th>Image Name</th>
+                    <th>PID</th>
+                    <th>User Name</th>
+                    <th>CPU</th>
+                    <th>Memory</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody id="taskmgr-process-list">
+                  <tr class="tm-process" data-process="chrome.exe">
+                    <td>chrome.exe</td>
+                    <td>5620</td>
+                    <td>Anurag</td>
+                    <td>00</td>
+                    <td>124,532 K</td>
+                    <td>Google Chrome</td>
+                  </tr>
+                  <tr class="tm-process" data-process="explorer.exe">
+                    <td>explorer.exe</td>
+                    <td>3096</td>
+                    <td>Anurag</td>
+                    <td>00</td>
+                    <td>45,120 K</td>
+                    <td>Windows Explorer</td>
+                  </tr>
+                  <tr class="tm-process" data-process="system32">
+                    <td>System</td>
+                    <td>4</td>
+                    <td>SYSTEM</td>
+                    <td>00</td>
+                    <td>2,456 K</td>
+                    <td>NT Kernel & System</td>
+                  </tr>
+                  <tr class="tm-process" data-process="svchost.exe">
+                    <td>svchost.exe</td>
+                    <td>3080</td>
+                    <td>LOCAL SERVICE</td>
+                    <td>00</td>
+                    <td>15,800 K</td>
+                    <td>Host Process for Windows...</td>
+                  </tr>
+                  <tr class="tm-process" data-process="taskmgr.exe">
+                    <td>taskmgr.exe</td>
+                    <td>2896</td>
+                    <td>Anurag</td>
+                    <td>00</td>
+                    <td>12,340 K</td>
+                    <td>Task Manager</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="taskmgr-controls">
+              <label
+                ><input type="checkbox" checked /> Show processes from all
+                users</label
+              >
+              <button id="btn-end-process">End Process</button>
+            </div>
+            <div class="taskmgr-statusbar">
+              <span>Processes: 115</span>
+              <span>CPU Usage: 5%</span>
+              <span>Physical Memory: 74%</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <ul id="context-menu" role="menu" class="can-hover" style="display: none">
@@ -1214,6 +1341,15 @@
 
             <div
               class="aero-taskbar-icon"
+              id="taskbar-taskmgr"
+              style="display: none"
+            >
+              <img src="./images/taskmgr.ico" alt="Task Manager" />
+              <div class="aero-peek"><div class="peek-thumb"></div></div>
+            </div>
+
+            <div
+              class="aero-taskbar-icon"
               id="taskbar-computer"
               style="display: none"
             >
@@ -1323,9 +1459,9 @@
               <img src="./images/internet.ico" alt="Web Browser" />
               <span>Internet Explorer</span>
             </div>
-            <div class="program-item" data-app="calculator">
-              <img src="./images/calc.png" alt="Calculator" />
-              <span>Calculator</span>
+            <div class="program-item" data-app="taskmgr">
+              <img src="./images/Taskmanager.ico" alt="Task Manager" />
+              <span>Task Manager</span>
             </div>
           </div>
 

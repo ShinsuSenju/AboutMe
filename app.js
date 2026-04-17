@@ -158,15 +158,15 @@ links.forEach((link) => {
   });
 });
 
+// Open apps from Start Menu
 document.querySelectorAll(".program-item").forEach((item) => {
   item.addEventListener("click", () => {
     const appId = item.getAttribute("data-app");
-    if (appId === "cmd") {
-      openWindow("cmd-window");
-    } else {
-      alert("App not installed yet!");
+    if (appId) {
+      openWindow(`${appId}-window`);
     }
-    startMenu.classList.remove("show");
+    const startMenu = document.getElementById("start-menu");
+    if (startMenu) startMenu.classList.remove("show");
   });
 });
 //windows
@@ -1341,4 +1341,57 @@ function openNotepad(fileName) {
   openWindow("notepad-window");
 }
 
-// cmd
+// task manager
+const processRows = document.querySelectorAll(".tm-process");
+const btnEndProcess = document.getElementById("btn-end-process");
+const bsodScreen = document.getElementById("bsod-screen");
+let selectedProcess = null;
+
+processRows.forEach((row) => {
+  row.addEventListener("click", () => {
+    processRows.forEach((r) => r.classList.remove("selected"));
+    row.classList.add("selected");
+    selectedProcess = row.getAttribute("data-process");
+  });
+});
+if (btnEndProcess) {
+  btnEndProcess.addEventListener("click", () => {
+    if (!selectedProcess) {
+      alert("Please select a process to terminate.");
+      return;
+    }
+
+    if (selectedProcess === "system32") {
+      if (bsodScreen) {
+        bsodScreen.classList.remove("hidden");
+        document.addEventListener(
+          "keydown",
+          () => {
+            window.location.reload();
+          },
+          { once: true },
+        );
+      }
+    } else if (selectedProcess === "explorer.exe") {
+      const desktopIcons = document.querySelector(".desktop-icons");
+      const taskbar = document.querySelector("#taskbar");
+
+      if (desktopIcons) desktopIcons.style.display = "none";
+      if (taskbar) taskbar.style.display = "none";
+
+      closeWindow("taskmgr-window");
+
+      setTimeout(() => {
+        if (desktopIcons) desktopIcons.style.display = "flex";
+        if (taskbar) taskbar.style.display = "flex";
+        alert("Windows Explorer has recovered from a critical failure.");
+      }, 4000);
+    } else if (selectedProcess === "taskmgr.exe") {
+      closeWindow("taskmgr-window");
+    } else {
+      alert(
+        `Access Denied: You do not have permission to terminate ${selectedProcess}.`,
+      );
+    }
+  });
+}
