@@ -1443,3 +1443,61 @@ window.onload = () => {
     loginScreen.classList.remove("hidden");
   }, 4000);
 };
+
+// shutdown
+const shutdownBtn = document.querySelector(".shutdown-btn");
+const shutdownScreen = document.getElementById("shutdown-screen");
+
+if (shutdownBtn) {
+  shutdownBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const startMenu = document.getElementById("start-menu");
+    if (startMenu) startMenu.classList.remove("show");
+
+    const desktop = document.getElementById("desktop");
+    if (desktop) desktop.classList.add("hidden");
+
+    const wpUi = document.getElementById("windows-phone-ui");
+    if (wpUi) wpUi.classList.add("wp-hidden");
+
+    if (shutdownScreen) {
+      shutdownScreen.classList.remove("hidden");
+    }
+
+    const audio = new Audio("./audio/shutdown.mp3");
+    audio.play().catch((err) => console.log("Audio blocked or missing: ", err));
+
+    setTimeout(() => {
+      if (shutdownScreen) {
+        shutdownScreen.innerHTML = "";
+        shutdownScreen.style.backgroundColor = "#000";
+        shutdownScreen.style.backgroundImage = "none";
+        shutdownScreen.style.cursor = "none";
+      }
+    }, 4000);
+  });
+}
+
+const wpArrowBtn = document.querySelector(".wp-arrow");
+
+if (wpArrowBtn) {
+  wpArrowBtn.addEventListener("click", () => {
+    const wpUi = document.getElementById("windows-phone-ui");
+    if (wpUi) wpUi.classList.add("wp-hidden");
+
+    if (shutdownScreen) {
+      shutdownScreen.classList.remove("hidden");
+    }
+    const audio = new Audio("./audio/shutdown.mp3");
+    audio.play().catch((err) => console.log("Audio blocked or missing: ", err));
+    setTimeout(() => {
+      if (shutdownScreen) {
+        shutdownScreen.innerHTML = "";
+        shutdownScreen.style.backgroundColor = "#000";
+        shutdownScreen.style.backgroundImage = "none";
+        shutdownScreen.style.cursor = "none";
+      }
+    }, 4000);
+  });
+}
