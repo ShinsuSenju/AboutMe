@@ -1445,28 +1445,28 @@ window.onload = () => {
 };
 
 // shutdown
-const shutdownBtn = document.querySelector(".shutdown-btn");
+const shutdownTriggers = document.querySelectorAll(".wp-arrow, .shutdown-btn");
 const shutdownScreen = document.getElementById("shutdown-screen");
 
-if (shutdownBtn) {
-  shutdownBtn.addEventListener("click", (e) => {
+shutdownTriggers.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const startMenu = document.getElementById("start-menu");
     if (startMenu) startMenu.classList.remove("show");
 
+    const wpUi = document.getElementById("windows-phone-ui");
+    if (wpUi) wpUi.classList.add("wp-hidden");
+
     const desktop = document.getElementById("desktop");
     if (desktop) desktop.classList.add("hidden");
 
-    const wpUi = document.getElementById("windows-phone-ui");
-    if (wpUi) wpUi.classList.add("wp-hidden");
-
     if (shutdownScreen) {
       shutdownScreen.classList.remove("hidden");
     }
-
     const audio = new Audio("./audio/shutdown.mp3");
-    audio.play().catch((err) => console.log("Audio blocked or missing: ", err));
+    audio.play().catch((err) => console.log("Audio skipped"));
 
     setTimeout(() => {
       if (shutdownScreen) {
@@ -1477,27 +1477,4 @@ if (shutdownBtn) {
       }
     }, 4000);
   });
-}
-
-const wpArrowBtn = document.querySelector(".wp-arrow");
-
-if (wpArrowBtn) {
-  wpArrowBtn.addEventListener("click", () => {
-    const wpUi = document.getElementById("windows-phone-ui");
-    if (wpUi) wpUi.classList.add("wp-hidden");
-
-    if (shutdownScreen) {
-      shutdownScreen.classList.remove("hidden");
-    }
-    const audio = new Audio("./audio/shutdown.mp3");
-    audio.play().catch((err) => console.log("Audio blocked or missing: ", err));
-    setTimeout(() => {
-      if (shutdownScreen) {
-        shutdownScreen.innerHTML = "";
-        shutdownScreen.style.backgroundColor = "#000";
-        shutdownScreen.style.backgroundImage = "none";
-        shutdownScreen.style.cursor = "none";
-      }
-    }, 4000);
-  });
-}
+});
