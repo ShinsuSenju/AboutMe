@@ -3,26 +3,12 @@ const loginScreen = document.getElementById("login-screen");
 const logo = document.querySelector(".win-logo img");
 const bootText = document.querySelector(".boot-text");
 
-window.onload = () => {
-  setTimeout(() => {
-    if (logo) logo.style.opacity = "1";
-    if (bootText) bootText.style.opacity = "1";
-  }, 500);
-
-  setTimeout(() => {
-    bootScreen.classList.add("hidden");
-    loginScreen.classList.remove("hidden");
-  }, 4000);
-};
-
 const loginBtn = document.querySelector(".blue-arrow-btn");
 const passwordInput = document.querySelector(".login-input");
 const hintDisplay = document.getElementById("password-hint");
 const wikiCard = document.getElementById("wiki-card");
 const desktop = document.getElementById("desktop");
 const welcomeScreen = document.getElementById("welcome-screen");
-
-// Old: const SECRET_PASSWORD = "linus";
 
 const VALID_PASSWORDS = ["linus", "linus torvalds", "torvalds"];
 
@@ -111,6 +97,8 @@ const edgeOffset = 10;
 function updateClock() {
   const timeDisplay = document.getElementById("time-display");
   const dateDisplay = document.getElementById("date-display");
+  const wpTimeDisplay = document.getElementById("wp-time-display");
+
   if (!timeDisplay || !dateDisplay) return;
   const now = new Date();
   let hours = now.getHours();
@@ -124,6 +112,8 @@ function updateClock() {
   const year = now.getFullYear();
   timeDisplay.innerText = `${hours}:${minutes} ${ampm}`;
   dateDisplay.innerText = `${day}/${month}/${year}`;
+
+  if (wpTimeDisplay) wpTimeDisplay.innerText = `${hours}:${minutes}`;
 }
 updateClock();
 setInterval(updateClock, 10000);
@@ -288,8 +278,7 @@ if (menuOpenWith) {
   menuOpenWith.addEventListener("click", (e) => {
     e.preventDefault();
     if (activeIcon) {
-      const fileName = activeIcon.querySelector("span").innerText;
-      alert(`Hey! I guess i forgot to build this :p`);
+      showError("Hey! I guess i forgot to build this :p", "Windows", "warning");
     }
     closeAllMenus();
   });
@@ -301,8 +290,10 @@ if (menuDelete) {
     e.preventDefault();
     if (activeIcon) {
       if (activeIcon.id === "icon-recycle") {
-        alert(
+        showError(
           "You cannot delete the Recycle Bin. That would break the universe.",
+          "Error",
+          "error",
         );
       } else {
         activeIcon.style.display = "none";
@@ -390,8 +381,10 @@ document.getElementById("menu-personalize").addEventListener("click", (e) => {
 // Easter Egg 1: Callback to the login screen joke
 document.getElementById("menu-linux").addEventListener("click", (e) => {
   e.preventDefault();
-  alert(
+  showError(
     "Error 404: Linux ISO not found. I guess we are stuck with Windows 7 for now.",
+    "System Error",
+    "error",
   );
   closeAllMenus();
 });
@@ -411,8 +404,10 @@ hackBtn.addEventListener("click", (e) => {
     hackBtn.removeAttribute("aria-disabled");
     hackStep = 1;
   } else {
-    alert(
+    showError(
       "BREACH DETECTED. GOOGLE CYBERSECURITY INBOUND... just kidding. Learn Hacking First!",
+      "Windows Defender Firewall",
+      "warning",
     );
     hackText.innerText = "Hack Google";
     hackText.style.color = "";
@@ -737,8 +732,10 @@ function emptyRecycleBin() {
     if (desktopRecycleIcon)
       desktopRecycleIcon.src = "./images/recycle-icon-empty.ico";
   } else {
-    alert(
-      "Hey what are you even deleting? can\'t you see it\'s already empty?",
+    showError(
+      "Hey what are you even deleting? can't you see it's already empty?",
+      "Recycle Bin",
+      "info",
     );
   }
 }
@@ -890,9 +887,13 @@ function bindFile() {
       } else if (type === "about") {
         openNotepad(name);
       } else if (type === "music") {
-        alert(`Playing ${name}... (I still need to build the Media Player!)`);
+        showError(
+          `Playing ${name}... (I still need to build the Media Player!)`,
+          "Windows Media Player",
+          "info",
+        );
       } else {
-        alert(`Unknown file type: ${name}`);
+        showError(`Unknown file type: ${name}`, "Windows Explorer", "error");
       }
     });
   });
@@ -931,7 +932,11 @@ function bindSidebarLinks() {
       } else if (text === "Videos") {
         window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
       } else if (text === "Music") {
-        alert("Playing OST... (Audio player coming soon!)");
+        showError(
+          "Playing OST... (Audio player coming soon!)",
+          "Windows Media Player",
+          "info",
+        );
       }
     });
   });
@@ -1262,7 +1267,11 @@ processRows.forEach((row) => {
 if (btnEndProcess) {
   btnEndProcess.addEventListener("click", () => {
     if (!selectedProcess) {
-      alert("Please select a process to terminate.");
+      showError(
+        "Please select a process to terminate.",
+        "Task Manager",
+        "warning",
+      );
       return;
     }
 
@@ -1289,13 +1298,19 @@ if (btnEndProcess) {
       setTimeout(() => {
         if (desktopIcons) desktopIcons.style.display = "flex";
         if (taskbar) taskbar.style.display = "flex";
-        alert("Windows Explorer has recovered from a critical failure.");
+        showError(
+          "Windows Explorer has recovered from a critical failure.",
+          "Windows Explorer",
+          "info",
+        );
       }, 4000);
     } else if (selectedProcess === "taskmgr.exe") {
       closeWindow("taskmgr-window");
     } else {
-      alert(
+      showError(
         `Access Denied: You do not have permission to terminate ${selectedProcess}.`,
+        "Task Manager",
+        "error",
       );
     }
   });
@@ -1382,3 +1397,49 @@ function showError(message, title = "Windows", iconType = "error") {
   const win = document.getElementById("error-window");
   if (win) focusWindow(win);
 }
+
+// hide boot for mobile & manage desktop boot
+window.onload = () => {
+  if (window.innerWidth <= 768) {
+    document.getElementById("boot").classList.add("hidden");
+    document.getElementById("login-screen").classList.add("hidden");
+    document.getElementById("desktop").classList.remove("hidden");
+
+    document.querySelectorAll(".window").forEach((win) => {
+      win.classList.add("window-closed");
+      win.style.display = "none";
+    });
+
+    const liveTiles = document.querySelectorAll(".live-tile .tile-inner");
+    const animations = ["flipX", "flipY", "flipXRev", "flipYRev"];
+
+    liveTiles.forEach((tile) => {
+      const randomAnim =
+        animations[Math.floor(Math.random() * animations.length)];
+      const randomDelay = Math.random() * 4;
+      const randomDuration = 7 + Math.random() * 4;
+
+      const backFace = tile.querySelector(".tile-back");
+      if (backFace) {
+        if (randomAnim.includes("flipX"))
+          backFace.style.transform = "rotateX(180deg) translateZ(0)";
+        if (randomAnim.includes("flipY"))
+          backFace.style.transform = "rotateY(180deg) translateZ(0)";
+      }
+
+      tile.style.animation = `${randomAnim} ${randomDuration}s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95) ${randomDelay}s`;
+    });
+
+    return;
+  }
+
+  setTimeout(() => {
+    if (logo) logo.style.opacity = "1";
+    if (bootText) bootText.style.opacity = "1";
+  }, 500);
+
+  setTimeout(() => {
+    bootScreen.classList.add("hidden");
+    loginScreen.classList.remove("hidden");
+  }, 4000);
+};
