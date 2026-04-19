@@ -2230,34 +2230,49 @@ button:focus {
     touch-action: manipulation;
     pointer-events: auto !important;
   }
-
   .wp-arrow svg {
     pointer-events: none;
   }
 
   .wp-tile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    padding: 0 30px 50px 30px;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-auto-rows: calc((100vw - 40px - 36px) / 4) !important;
+    grid-auto-flow: dense !important;
+    gap: 12px !important;
+    padding: 0 20px 50px 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
+
   .wp-tile {
     position: relative;
     cursor: pointer;
     perspective: 1000px;
     background: transparent;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
   .wp-tile:active {
     transform: scale(0.96);
     transition: transform 0.1s;
   }
+
   .wp-wide {
-    grid-column: span 2;
-    aspect-ratio: 2.1 / 1;
+    grid-column: span 4 !important;
+    grid-row: span 2 !important;
+    aspect-ratio: unset !important;
   }
   .wp-square {
-    grid-column: span 1;
-    aspect-ratio: 1 / 1;
+    grid-column: span 2 !important;
+    grid-row: span 2 !important;
+    aspect-ratio: unset !important;
+  }
+  .wp-small {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    aspect-ratio: unset !important;
   }
 
   .wp-cyan {
@@ -2306,7 +2321,14 @@ button:focus {
     color: #fff;
   }
 
-  /* live tile */
+  .wp-small .wp-icon {
+    width: 25px;
+    height: 25px;
+  }
+  .wp-small .wp-label {
+    display: none;
+  }
+
   .live-tile .tile-inner {
     width: 100%;
     height: 100%;
@@ -2411,7 +2433,6 @@ button:focus {
     flex-direction: column !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
-
     -ms-overflow-style: none !important;
     scrollbar-width: none !important;
   }
@@ -2447,7 +2468,6 @@ button:focus {
     width: 100% !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
-
     -ms-overflow-style: none !important;
     scrollbar-width: none !important;
   }
@@ -2522,7 +2542,6 @@ button:focus {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-
     white-space: normal !important;
     word-wrap: break-word !important;
     word-break: break-all !important;
