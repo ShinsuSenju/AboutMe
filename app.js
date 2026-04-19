@@ -1407,20 +1407,30 @@ window.onload = () => {
     const animations = ["flipX", "flipY", "flipXRev", "flipYRev"];
 
     liveTiles.forEach((tile) => {
-      const randomAnim =
-        animations[Math.floor(Math.random() * animations.length)];
-      const randomDelay = Math.random() * 4;
-      const randomDuration = 7 + Math.random() * 4;
+      const animations = ["flipX", "flipY", "flipXRev", "flipYRev"];
 
-      const backFace = tile.querySelector(".tile-back");
-      if (backFace) {
-        if (randomAnim.includes("flipX"))
-          backFace.style.transform = "rotateX(180deg) translateZ(0)";
-        if (randomAnim.includes("flipY"))
-          backFace.style.transform = "rotateY(180deg) translateZ(0)";
+      function applyRandomFlip() {
+        const randomAnim =
+          animations[Math.floor(Math.random() * animations.length)];
+        const randomDuration = 7 + Math.random() * 4;
+        const randomDelay = Math.random() * 5;
+
+        const backFace = tile.querySelector(".tile-back");
+        if (backFace) {
+          backFace.style.transform = randomAnim.includes("flipX")
+            ? "rotateX(180deg) translateZ(0)"
+            : "rotateY(180deg) translateZ(0)";
+        }
+
+        tile.style.animation = `${randomAnim} ${randomDuration}s cubic-bezier(0.45, 0.05, 0.55, 0.95) ${randomDelay}s`;
       }
+      tile.addEventListener("animationend", () => {
+        tile.style.animation = "none";
+        void tile.offsetWidth;
+        applyRandomFlip();
+      });
 
-      tile.style.animation = `${randomAnim} ${randomDuration}s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95) ${randomDelay}s`;
+      applyRandomFlip();
     });
 
     return;
