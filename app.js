@@ -993,7 +993,6 @@ function processCommand(cmd) {
           "&nbsp;&nbsp;books&nbsp;&nbsp;&nbsp;&nbsp;- List books I'm currently reading<br>" +
           "&nbsp;&nbsp;update&nbsp;&nbsp;&nbsp;- Install critical system updates<br>" + // <-- ADD THIS
           "&nbsp;&nbsp;music&nbsp;&nbsp;&nbsp;&nbsp;- Play/Stop coding music<br>" +
-          "&nbsp;&nbsp;pacman&nbsp;&nbsp;&nbsp;- Play ASCII Pacman<br>" +
           "&nbsp;&nbsp;kamui&nbsp;&nbsp;&nbsp;&nbsp;- [RESTRICTED ACCESS]",
       );
       break;
@@ -1028,23 +1027,17 @@ function processCommand(cmd) {
       );
       break;
     case "music":
-      if (currentAudio && !currentAudio.paused) {
-        currentAudio.pause();
-        printToCmd("Music stopped.");
+      if (window.bgMusic && !window.bgMusic.paused) {
+        window.bgMusic.pause();
+        printToCmd("Music Paused.");
       } else {
-        printToCmd(
-          "Loading OST Track... (Add an mp3 to /audio/ost.mp3 to make this work!)",
-        );
-        // currentAudio = new Audio("./audio/ost.mp3");
-        // currentAudio.play();
+        if (!window.bgMusic) {
+          window.bgMusic = new Audio("./audio/diamond_tunes.mp3");
+          window.bgMusic.loop = true;
+        }
+        window.bgMusic.play();
+        printToCmd("Now playing: Happy Music - Diamond Tunes.mp3");
       }
-      break;
-    case "pacman":
-      printToCmd(
-        "<br>" +
-          "&nbsp;&nbsp;&nbsp;<span style='color:yellow'>ᗧ</span>&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;<span style='color:red'>👻</span><br>" +
-          "<br>Use arrow keys to play! (Just kidding, still W.I.P)",
-      );
       break;
     case "kamui":
       printToCmd(

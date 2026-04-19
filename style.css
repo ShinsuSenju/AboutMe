@@ -2543,9 +2543,10 @@ button:focus {
     max-width: 100% !important;
     box-sizing: border-box !important;
     white-space: normal !important;
-    word-wrap: break-word !important;
+    word-wrap: normal !important;
     word-break: break-all !important;
     overflow-x: hidden !important;
+    overflow-wrap: break-word !important;
   }
 
   #cmd-input-line {
